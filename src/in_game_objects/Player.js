@@ -18,7 +18,7 @@ export default class Player {
         mouse_move_events.subscribe((event)=>{
 
             let cursor_not_close_to_right_edge
-                = event.clientX < window.innerWidth - 200;
+                = event.clientX < window.innerWidth - 250;
 
             if(cursor_not_close_to_right_edge)
                 this.dom_element.style.left = event.clientX + 50;
