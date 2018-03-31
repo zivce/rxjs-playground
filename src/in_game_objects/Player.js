@@ -45,14 +45,39 @@ export default class Player {
     }
     
     firePower(){
-        let bullet = document.createElement("div");
-        bullet.className = "bullet_fill";
-
-        console.log(this);
         
+        let SPEED = 30;
+        let MOVEMENT_SPEED = 5;
+
+        let bullet = document.createElement("div");
+        bullet.className = "bullet_fill";  
         bullet.style.left = this.dom_element.offsetLeft + 55;
         bullet.style.bottom = "100px";
+        
         this.container.appendChild(bullet);
+        let len = bullet.style.bottom.length;
+        
+        let bottom_offset = bullet.style.bottom.slice(0,len-2);
+        bottom_offset = new Number(bottom_offset);
+        let that = this;
+
+        Rx.Observable.interval(SPEED)
+            .subscribe(function(){
+
+                bottom_offset += MOVEMENT_SPEED;
+                bullet.style.bottom = `${bottom_offset}px`;
+
+                let over_top_edge = bottom_offset >= window.innerHeight;
+                
+                if(over_top_edge)
+                {
+                    this.unsubscribe();
+                    that.container.removeChild(bullet);
+                    return;   
+                }
+
+            })
+
     }
 
 }

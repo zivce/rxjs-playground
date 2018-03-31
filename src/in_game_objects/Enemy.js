@@ -19,34 +19,34 @@ export default class Enemy {
     startMoving(speed){
         //variables block
         let that = this;
-        let top_offset = 20;
+        let TOP_OFFSET = 20;
+
         let windowHeight = window.innerHeight;
         let windowWidth = window.innerWidth;
+        
         let left_offset = Math.random()*(windowWidth-100) % windowWidth;
         
         //on certaion `speed` the enemy moves down
         Rx.Observable.interval(speed).subscribe(function()
         {
 
-            top_offset+=20;
-            that.dom_element.style.top = `${top_offset}px`;
+            TOP_OFFSET+=20;
+            that.dom_element.style.top = `${TOP_OFFSET}px`;
 
-
-            left_offset = Math.random()*(windowWidth-100) % windowWidth;
             that.dom_element.style.left = `${left_offset}px`;
             
             //when enemy has reached the end of window
             //remove it from playground
             // & unsubscribe from Observable
-
-            if(top_offset >= windowHeight)
+            
+            let off_bottom_edge = TOP_OFFSET >= windowHeight;
+            
+            if(off_bottom_edge)
             {
                 this.unsubscribe();
                 that.container.removeChild(that.dom_element);
                 return;
-                
             }
-                
         });
 
     }
