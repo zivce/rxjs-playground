@@ -1,0 +1,10 @@
+.player_fill{
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom:20px;
+    left:50vw;
+    border-style: solid;
+    border-width: 0 62px 79px 62px;
+    border-color:  transparent transparent #3d02d3b7 transparent;
+}
