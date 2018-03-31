@@ -14,12 +14,14 @@ export default class Player {
         this.dom_element = document.createElement("div");
         this.dom_element.className = "player_fill";
         
+
+
         node.appendChild(this.dom_element);
         
         //movement events handled
         const mouse_move_events = Rx.Observable.fromEvent(document,'mousemove');
         mouse_move_events.subscribe((event)=>{
-
+    
             let cursor_not_close_to_right_edge
                 = event.clientX < window.innerWidth - 250;
 
@@ -39,6 +41,27 @@ export default class Player {
             {
                 this.firePower();
             }
+        })
+
+        //vars used in subscription below
+        let thisPlayer = this;
+        let RETURN_TO_NORMAL_PLAYER = 300;
+
+
+        spacebar_pressed.subscribe(function(keypressed_event){
+            let that = this;//unsubscribe function
+            if(keypressed_event.code === 'Space')
+            {
+                thisPlayer.dom_element.className = "player_shooted";
+                
+            }
+
+            window.setTimeout(()=>
+            {
+                thisPlayer.dom_element.className= "player_fill";    
+
+            },RETURN_TO_NORMAL_PLAYER);
+            
         })
 
 
@@ -64,6 +87,8 @@ export default class Player {
         Rx.Observable.interval(SPEED)
             .subscribe(function(){
 
+                //player shooted
+
                 bottom_offset += MOVEMENT_SPEED;
                 bullet.style.bottom = `${bottom_offset}px`;
 
@@ -75,7 +100,7 @@ export default class Player {
                     that.container.removeChild(bullet);
                     return;   
                 }
-
+                
             })
 
     }

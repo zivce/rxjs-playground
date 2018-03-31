@@ -1,7 +1,7 @@
 .enemy_fill{
     width: 0;
     height: 0;
-    position: relative;
+    position: absolute;
     border-style: solid;
     border-width: 71.0px 41px 0 41px;
     border-color: #c02244 transparent transparent transparent;

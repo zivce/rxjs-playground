@@ -1,4 +1,4 @@
-import styles from '../styles/enemy.css';
+import  '../styles/enemy.css';
 
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
@@ -39,8 +39,8 @@ export default class Enemy {
             //remove it from playground
             // & unsubscribe from Observable
             
-            let off_bottom_edge = TOP_OFFSET >= windowHeight;
-            
+            let off_bottom_edge = TOP_OFFSET >= windowHeight - 50;
+
             if(off_bottom_edge)
             {
                 this.unsubscribe();
