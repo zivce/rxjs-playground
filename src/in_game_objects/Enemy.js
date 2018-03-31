@@ -1,7 +1,7 @@
 import styles from '../styles/enemy.css';
 
 import Rx from 'rxjs';
-import {interval} from 'rxjs/Observable/interval';
+import {interval} from 'rxjs/observable/interval';
 
 export default class Enemy {
     
@@ -13,7 +13,6 @@ export default class Enemy {
         
         
         node.appendChild(this.dom_element);
-        console.log(this)
         
     }
 
