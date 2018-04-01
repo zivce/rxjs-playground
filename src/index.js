@@ -49,36 +49,10 @@ Rx.Observable.interval(1).subscribe(function(){
             {
                 let remove_enemy_index = Enemies.indexOf(enemy);
                 Enemies.splice(remove_enemy_index,1);
-
-                // console.log("removed enemy @ " + enemy.dom_element.style.left)
                 enemy.dom_element.parentNode.removeChild(enemy.dom_element);
-                // console.log(Enemies)
                 return;
             }
             
-
-            // let enemy_top_offset = enemy.dom_element.style.top;
-            // let enemy_left_offset = enemy.dom_element.style.left;
-
-
-            // let bullet_bottom_offset = bullet.style.bottom;
-            // let bullet_left_offset = bullet.style.left;
-            
-            // //x and y coords of bullet hit
-            // let bullet_hit_enemy_y =
-            //     enemy_top_offset === bullet_bottom_offset;
-            // // console.log("bullet hit on y", bullet_hit_enemy_y);
-
-
-            // let enemy_x = fromPixelsToInt(enemy_left_offset);
-            // let bullet_x = fromPixelsToInt(bullet_left_offset);
-            // let deviation = 30;
-
-            // let bullet_hit_enemy_x = 
-            //     (Math.abs(enemy_x - bullet_x) < deviation);
-            
-            // console.log("hit on x coord " + bullet_hit_enemy_x)
-            // let bullet_hit_enemy = bullet_hit_enemy_x && bullet_hit_enemy_y;
 
             let enemy_rect = enemy.dom_element.getBoundingClientRect();
             
@@ -94,11 +68,13 @@ Rx.Observable.interval(1).subscribe(function(){
             bullet_rect.y;
             
             let bullet_hit_enemy = y_match && x_match;
-            console.log(bullet_hit_enemy);
+
             // NANESI STETU
             if(bullet_hit_enemy)
             {
                 console.log("bullet hit!");
+                bullet.parentNode.removeChild(bullet);
+
                 enemy.health_points-=10;
                 //console.log(enemy.health_points);
                 
