@@ -81,22 +81,28 @@ Rx.Observable.interval(1).subscribe(function(){
             // let bullet_hit_enemy = bullet_hit_enemy_x && bullet_hit_enemy_y;
 
             let enemy_rect = enemy.dom_element.getBoundingClientRect();
-            console.log(enemy_rect);
-            // let x_match = .x === 
-            //     bullet.getBoundingClientRect().x;
-            // let y_match = enemy.dom_element.getBoundingClientRect().y ===
-            //     bullet.getBoundingClientRect().y;
+            
+            // console.log(enemy_rect);
 
-            // let bullet_hit_enemy = y_match && x_match;
+            let bullet_rect = bullet.getBoundingClientRect();
 
-            //NANESI STETU
-            // if(bullet_hit_enemy)
-            // {
-            //     console.log("bullet hit!");
-            //     enemy.health_points-=10;
-            //     //console.log(enemy.health_points);
+
+            let x_match = (enemy_rect.x - 
+                bullet_rect.x) < 50;
+
+            let y_match = enemy_rect.y ===
+            bullet_rect.y;
+            
+            let bullet_hit_enemy = y_match && x_match;
+            console.log(bullet_hit_enemy);
+            // NANESI STETU
+            if(bullet_hit_enemy)
+            {
+                console.log("bullet hit!");
+                enemy.health_points-=10;
+                //console.log(enemy.health_points);
                 
-            // }
+            }
         })
     })
 },
