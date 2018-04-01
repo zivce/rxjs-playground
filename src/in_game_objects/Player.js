@@ -9,6 +9,7 @@ export default class Player {
     
     constructor(node){
         //simple init
+        
         this.score = 0;
         this.health_points = 100;
         this.bullets = [];
@@ -71,6 +72,7 @@ export default class Player {
     }
 
     listenerForCollision(enemies){
+        
         enemies
             .filter((enemy)=>{
                 let en = enemy.dom_element.getBoundingClientRect();
@@ -83,7 +85,7 @@ export default class Player {
                 let enemy_rect = enemy.dom_element.getBoundingClientRect();
                 let player_rect = this.dom_element.getBoundingClientRect();
 
-                let x_hit = ( Math.abs((player_rect.x + player_rect.width/2) - (enemy_rect.x+enemy_rect.width/2))) < 50;
+                let x_hit = ( Math.abs((player_rect.x + player_rect.width/2) - (enemy_rect.x+enemy_rect.width/2))) < 100;
 
                 let y_hit = Math.abs(enemy_rect.y - player_rect.y) === 0;
 
@@ -99,12 +101,11 @@ export default class Player {
                         if(this.dom_element.parentNode != null)
                             this.dom_element.parentNode.removeChild(this.dom_element);
                         
-                        //player died
-                        return true;
                     }
                         
                 }
             })
+            return this.health_points;
     }
     firePower(){
         

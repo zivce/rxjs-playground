@@ -44,11 +44,13 @@ let player = new Player(wrapper);
 
 Rx.Observable.interval(10).subscribe(function(){
     //console.log(player);
-    player.listenerForCollision(Enemies);
+    let hp = player.listenerForCollision(Enemies);
 
-    let collision = false;
-    if(collision)
-        this.unsubscribe();
+    if(hp <= 0)
+    {
+        
+        this.unsubscribe();                
+    }
 })
 
 
