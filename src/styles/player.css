@@ -18,3 +18,8 @@
     border-width: 0 62px 79px 62px;
     border-color:  transparent transparent #3d02d3b7 transparent;
 }
+
+.game_over_txt_style{
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

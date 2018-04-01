@@ -4,12 +4,12 @@ import '../styles/bullet.css'
 
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
-import fromPixelsToInt from '../utils/fromPixelsToInt';
 
 export default class Player {
     
     constructor(node){
         //simple init
+        
         this.score = 0;
         this.health_points = 100;
         this.bullets = [];
@@ -70,7 +70,49 @@ export default class Player {
 
 
     }
-    
+
+    listenerForCollision(enemies){
+        
+        enemies
+            .filter((enemy)=>{
+                let en = enemy.dom_element.getBoundingClientRect();
+                //console.log(en);
+                let enemy_in_game = en.x !== 0 && en.y !== 0;
+                return enemy_in_game;
+
+            })
+            .forEach((enemy)=>{
+                let enemy_rect = enemy.dom_element.getBoundingClientRect();
+                let player_rect = this.dom_element.getBoundingClientRect();
+
+                let x_hit = ( Math.abs((player_rect.x + player_rect.width/2) - (enemy_rect.x+enemy_rect.width/2))) < 100;
+
+                let y_hit = Math.abs(enemy_rect.y - player_rect.y) === 0;
+
+                if(x_hit && y_hit)
+                {
+                    console.log("enemy collision!");
+                    this.health_points -= 10;
+                    console.log(this.health_points);
+                    // KIA
+                    if(this.health_points <= 0)
+                    {
+                        
+                        let p = document.createElement("h1");
+                        p.innerText=`GAME OVER! Your score is: ${this.score}`;
+                        p.className="game_over_txt_style";
+
+                        this.dom_element.parentNode.appendChild(p);
+
+                        if(this.dom_element.parentNode != null)
+                            this.dom_element.parentNode.removeChild(this.dom_element);
+                        
+                    }
+                        
+                }
+            })
+            return this.health_points;
+    }
     firePower(){
         
         let SPEED = 5;
@@ -83,8 +125,9 @@ export default class Player {
         
         this.container.appendChild(bullet);
         this.bullets.push(bullet);
-        
-        let bottom_offset = fromPixelsToInt(bullet.style.bottom);
+        let bottom_bullet = bullet.getBoundingClientRect();
+
+        let bottom_offset = 100;
 
         let that = this;
         

@@ -4,7 +4,6 @@ import Player from './in_game_objects/Player';
 
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
-import fromPixelsToInt from './utils/fromPixelsToInt';
 
 //styles
 import styles from './styles/styles.css';
@@ -14,7 +13,9 @@ let wrapper = document.createElement("div");
 wrapper.className="container";
 document.body.appendChild(wrapper);
 
-let DIFFICULTY = 20;
+let NUMBER_ENEMIES = 20;//HIGHER = HARDER
+let ENEMIES_SPEED = 100;//LOWER = HARDER
+let DIFFICULTY_ENEMY_HP_DESTRUCTION = 5;//LOWER = HARDER
 
 //consts    
 let window_height = window.innerHeight - 50;
@@ -25,9 +26,9 @@ let I = 0 ;
 Rx.Observable.interval(1000)
     .subscribe(function(){
         Enemies.push(new Enemy(wrapper));
-        Enemies[Enemies.length-1].startMoving(300);
+        Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
         I++
-        if(I === DIFFICULTY)
+        if(I === NUMBER_ENEMIES)
             this.unsubscribe();
 
     },
@@ -39,6 +40,18 @@ Rx.Observable.interval(1000)
 //player has joined the game
 let player = new Player(wrapper);
 
+//Check for collision
+
+Rx.Observable.interval(10).subscribe(function(){
+    //console.log(player);
+    let hp = player.listenerForCollision(Enemies);
+
+    if(hp <= 0)
+    {
+        
+        this.unsubscribe();                
+    }
+})
 
 
 //shots hit the target  
@@ -60,31 +73,30 @@ Rx.Observable.interval(1).subscribe(function(){
 
             let enemy_rect = enemy.dom_element.getBoundingClientRect();
             
-            // console.log(enemy_rect);
 
             let bullet_rect = bullet.getBoundingClientRect();
 
+            let x_match = ( Math.abs(bullet_rect.x - (enemy_rect.x+enemy_rect.width/2))) < 50;
 
-            let x_match = ( Math.abs(bullet_rect.x - enemy_rect.x)) < 50;
 
-            let x_match_1 = ( Math.abs(enemy_rect.x - bullet_rect.x)) < 50;
+            let y_match = Math.abs(enemy_rect.y -
+            bullet_rect.y) < 5 ;
             
-            let y_match = enemy_rect.y ===
-            bullet_rect.y;
+            let bullet_hit_enemy = y_match && x_match ;
             
-            let bullet_hit_enemy = y_match && x_match && x_match_1;
 
             // NANESI STETU
             if(bullet_hit_enemy)
             {
-                console.log("bullet hit!");
+                //console.log("bullet hit!");
 
                 const parent = bullet.parentNode;
 
                 if(parent != null)
                     parent.removeChild(bullet);
-
-                enemy.health_points-=10;
+                player.score += DIFFICULTY_ENEMY_HP_DESTRUCTION;
+                
+                enemy.health_points-= DIFFICULTY_ENEMY_HP_DESTRUCTION;
                 //console.log(enemy.health_points);
                 
             }
