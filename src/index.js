@@ -14,6 +14,7 @@ let wrapper = document.createElement("div");
 wrapper.className="container";
 document.body.appendChild(wrapper);
 
+let DIFFICULTY = 20;
 
 //consts    
 let window_height = window.innerHeight - 50;
@@ -21,11 +22,14 @@ let window_height = window.innerHeight - 50;
 let Enemies = [];
 
 //generating enemies
-Rx.Observable.interval(1000).take(6)
+Rx.Observable.interval(1000)
     .subscribe(function(){
         Enemies.push(new Enemy(wrapper));
         Enemies[Enemies.length-1].startMoving(300);
         
+        if(Enemies.length === DIFFICULTY)
+            this.unsubscribe();
+
     },
     (err)=>{
         console.log(err)
@@ -61,24 +65,30 @@ Rx.Observable.interval(1).subscribe(function(){
             let bullet_rect = bullet.getBoundingClientRect();
 
 
-            let x_match = (enemy_rect.x - 
-                bullet_rect.x) < 50;
+            let x_match = ( Math.abs(bullet_rect.x - enemy_rect.x)) < 50;
 
+            let x_match_1 = ( Math.abs(enemy_rect.x - bullet_rect.x)) < 50;
+            
             let y_match = enemy_rect.y ===
             bullet_rect.y;
             
-            let bullet_hit_enemy = y_match && x_match;
+            let bullet_hit_enemy = y_match && x_match && x_match_1;
 
             // NANESI STETU
             if(bullet_hit_enemy)
             {
                 console.log("bullet hit!");
-                bullet.parentNode.removeChild(bullet);
+
+                const parent = bullet.parentNode;
+
+                if(parent != null)
+                    parent.removeChild(bullet);
 
                 enemy.health_points-=10;
                 //console.log(enemy.health_points);
                 
             }
+
         })
     })
 },

@@ -103,7 +103,10 @@ export default class Player {
                 if(over_top_edge)
                 {
                     this.unsubscribe();
-                    that.container.removeChild(bullet);
+                    const parent = bullet.parentNode;
+
+                    if(parent !== null)
+                        parent.removeChild(bullet);
                     
                     //Removing not visible bullet
                     let remove_this_bullet_index = that.bullets.indexOf(bullet);
