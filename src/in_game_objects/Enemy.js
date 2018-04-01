@@ -36,6 +36,9 @@ export default class Enemy {
             that.dom_element.style.top = `${TOP_OFFSET}px`;
 
             
+            //console.log(that.dom_element.getBoundingClientRect());
+
+
             //when enemy has reached the end of window
             //remove it from playground
             // & unsubscribe from Observable
@@ -46,7 +49,7 @@ export default class Enemy {
             if(off_bottom_edge && that.health_points > 0)
             {
                 this.unsubscribe();
-                console.log(that);
+                //console.log(that);
                 that.container.removeChild(that.dom_element);
                 return;
             }
