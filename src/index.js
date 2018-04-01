@@ -4,7 +4,6 @@ import Player from './in_game_objects/Player';
 
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
-import fromPixelsToInt from './utils/fromPixelsToInt';
 
 //styles
 import styles from './styles/styles.css';
@@ -14,7 +13,9 @@ let wrapper = document.createElement("div");
 wrapper.className="container";
 document.body.appendChild(wrapper);
 
-let DIFFICULTY = 20;
+let NUMBER_ENEMIES = 20;//HIGHER = HARDER
+let ENEMIES_SPEED = 100;//LOWER = HARDER
+let DIFFICULTY_ENEMY_HP_DESTRUCTION = 5;//LOWER = HARDER
 
 //consts    
 let window_height = window.innerHeight - 50;
@@ -25,9 +26,9 @@ let I = 0 ;
 Rx.Observable.interval(1000)
     .subscribe(function(){
         Enemies.push(new Enemy(wrapper));
-        Enemies[Enemies.length-1].startMoving(300);
+        Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
         I++
-        if(I === DIFFICULTY)
+        if(I === NUMBER_ENEMIES)
             this.unsubscribe();
 
     },
@@ -39,6 +40,16 @@ Rx.Observable.interval(1000)
 //player has joined the game
 let player = new Player(wrapper);
 
+//Check for collision
+
+Rx.Observable.interval(10).subscribe(function(){
+    //console.log(player);
+    player.listenerForCollision(Enemies);
+
+    let collision = false;
+    if(collision)
+        this.unsubscribe();
+})
 
 
 //shots hit the target  
@@ -75,14 +86,14 @@ Rx.Observable.interval(1).subscribe(function(){
             // NANESI STETU
             if(bullet_hit_enemy)
             {
-                console.log("bullet hit!");
+                //console.log("bullet hit!");
 
                 const parent = bullet.parentNode;
 
                 if(parent != null)
                     parent.removeChild(bullet);
 
-                enemy.health_points-=10;
+                enemy.health_points-= DIFFICULTY_ENEMY_HP_DESTRUCTION;
                 //console.log(enemy.health_points);
                 
             }
