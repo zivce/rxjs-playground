@@ -60,23 +60,18 @@ Rx.Observable.interval(1).subscribe(function(){
 
             let enemy_rect = enemy.dom_element.getBoundingClientRect();
             
-            // console.log(enemy_rect);
 
             let bullet_rect = bullet.getBoundingClientRect();
 
+            let x_match = ( Math.abs(bullet_rect.x - (enemy_rect.x+enemy_rect.width/2))) < 50;
 
-            let x_match = ( Math.abs(bullet_rect.x - enemy_rect.x)) < 50;
 
-            // let x_match_1 = ( Math.abs(enemy_rect.x - bullet_rect.x)) < 50;
-            
-            let y_match = enemy_rect.y ===
-            bullet_rect.y;
+            let y_match = Math.abs(enemy_rect.y -
+            bullet_rect.y) < 5 ;
             
             let bullet_hit_enemy = y_match && x_match ;
-            // if(y_match)
-            // console.log(" y koordinata ",y_match);
-            // if(x_match)
-            // console.log("x koordinata", x_match);
+            
+
             // NANESI STETU
             if(bullet_hit_enemy)
             {
