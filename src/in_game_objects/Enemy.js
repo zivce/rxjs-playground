@@ -12,6 +12,9 @@ export default class Enemy {
         this.dom_element.className = "enemy_fill";
         
         
+        let windowWidth = window.innerWidth;
+        let left_offset = Math.random()*(windowWidth-100) % windowWidth;
+        this.dom_element.style.left = `${left_offset}px`;
         node.appendChild(this.dom_element);
         
     }
@@ -22,9 +25,7 @@ export default class Enemy {
         let TOP_OFFSET = 20;
 
         let windowHeight = window.innerHeight;
-        let windowWidth = window.innerWidth;
         
-        let left_offset = Math.random()*(windowWidth-100) % windowWidth;
         
         //on certaion `speed` the enemy moves down
         Rx.Observable.interval(speed).subscribe(function()
@@ -33,7 +34,6 @@ export default class Enemy {
             TOP_OFFSET+=20;
             that.dom_element.style.top = `${TOP_OFFSET}px`;
 
-            that.dom_element.style.left = `${left_offset}px`;
             
             //when enemy has reached the end of window
             //remove it from playground
