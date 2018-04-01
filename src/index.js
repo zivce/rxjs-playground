@@ -14,7 +14,7 @@ let wrapper = document.createElement("div");
 wrapper.className="container";
 document.body.appendChild(wrapper);
 
-let DIFFICULTY = 20;
+let DIFFICULTY = 6;
 
 //consts    
 let window_height = window.innerHeight - 50;
@@ -67,13 +67,16 @@ Rx.Observable.interval(1).subscribe(function(){
 
             let x_match = ( Math.abs(bullet_rect.x - enemy_rect.x)) < 50;
 
-            let x_match_1 = ( Math.abs(enemy_rect.x - bullet_rect.x)) < 50;
+            // let x_match_1 = ( Math.abs(enemy_rect.x - bullet_rect.x)) < 50;
             
             let y_match = enemy_rect.y ===
             bullet_rect.y;
             
-            let bullet_hit_enemy = y_match && x_match && x_match_1;
-
+            let bullet_hit_enemy = y_match && x_match ;
+            // if(y_match)
+            // console.log(" y koordinata ",y_match);
+            // if(x_match)
+            // console.log("x koordinata", x_match);
             // NANESI STETU
             if(bullet_hit_enemy)
             {
