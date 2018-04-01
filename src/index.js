@@ -14,7 +14,7 @@ let wrapper = document.createElement("div");
 wrapper.className="container";
 document.body.appendChild(wrapper);
 
-let DIFFICULTY = 6;
+let DIFFICULTY = 20;
 
 //consts    
 let window_height = window.innerHeight - 50;
