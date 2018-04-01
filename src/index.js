@@ -20,14 +20,14 @@ let DIFFICULTY = 20;
 let window_height = window.innerHeight - 50;
 
 let Enemies = [];
-
+let I = 0 ;
 //generating enemies
 Rx.Observable.interval(1000)
     .subscribe(function(){
         Enemies.push(new Enemy(wrapper));
         Enemies[Enemies.length-1].startMoving(300);
-        
-        if(Enemies.length === DIFFICULTY)
+        I++
+        if(I === DIFFICULTY)
             this.unsubscribe();
 
     },
