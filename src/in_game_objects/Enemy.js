@@ -22,7 +22,8 @@ export default class Enemy {
     startMoving(speed){
         //variables block
         let that = this;
-        let TOP_OFFSET = 20;
+        let TOP_OFFSET = 50;
+        let MOVEMENT_SPEED = 5;
 
         let windowHeight = window.innerHeight;
         
@@ -31,7 +32,7 @@ export default class Enemy {
         Rx.Observable.interval(speed).subscribe(function()
         {
 
-            TOP_OFFSET+=20;
+            TOP_OFFSET+=MOVEMENT_SPEED;
             that.dom_element.style.top = `${TOP_OFFSET}px`;
 
             

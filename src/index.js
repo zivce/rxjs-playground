@@ -21,10 +21,10 @@ let window_height = window.innerHeight - 50;
 let Enemies = [];
 
 //generating enemies
-Rx.Observable.interval(1000).take(3)
+Rx.Observable.interval(1000).take(6)
     .subscribe(function(){
         Enemies.push(new Enemy(wrapper));
-        Enemies[Enemies.length-1].startMoving(500);
+        Enemies[Enemies.length-1].startMoving(300);
         
     },
     (err)=>{
@@ -37,28 +37,11 @@ let player = new Player(wrapper);
 
 
 
-
-// //Filter out enemies 
-// Rx.Observable.interval(5).subscribe(function(){
-    
-//     //filter out only in game enemies
-//     Enemies = Enemies.filter((enemy)=>{
-        
-//         let top_offset = fromPixelsToInt(enemy.dom_element.style.top);
-//         let in_game_enemy = top_offset < window_height;    
-//         let alive_enemy = enemy.health_points !== 0;
-//         return in_game_enemy && alive_enemy;
-//     })
-// },
-// (err)=>{
-//     console.log(err)
-// })
-
 //shots hit the target  
 Rx.Observable.interval(1).subscribe(function(){
     
-    player.bullets.forEach((bullet)=>{
-        Enemies.forEach((enemy)=>{
+    player.bullets.forEach(function(bullet){
+        Enemies.forEach(function(enemy){
 
             //if killed remove from array and continue
             
@@ -67,9 +50,9 @@ Rx.Observable.interval(1).subscribe(function(){
                 let remove_enemy_index = Enemies.indexOf(enemy);
                 Enemies.splice(remove_enemy_index,1);
 
-                console.log("removed enemy @ " + enemy.dom_element.style.left)
+                // console.log("removed enemy @ " + enemy.dom_element.style.left)
                 enemy.dom_element.parentNode.removeChild(enemy.dom_element);
-                console.log(Enemies)
+                // console.log(Enemies)
                 return;
             }
 
@@ -83,12 +66,12 @@ Rx.Observable.interval(1).subscribe(function(){
             //x and y coords of bullet hit
             let bullet_hit_enemy_y =
                 enemy_top_offset === bullet_bottom_offset;
-            console.log("bullet hit on y", bullet_hit_enemy_y);
+            // console.log("bullet hit on y", bullet_hit_enemy_y);
 
 
             let enemy_x = fromPixelsToInt(enemy_left_offset);
             let bullet_x = fromPixelsToInt(bullet_left_offset);
-            let deviation = 50;
+            let deviation = 30;
 
             let bullet_hit_enemy_x = 
                 (Math.abs(enemy_x - bullet_x) < deviation);
@@ -99,11 +82,8 @@ Rx.Observable.interval(1).subscribe(function(){
             //NANESI STETU
             if(bullet_hit_enemy)
             {
-                console.log("bullet hit!");
+                // console.log("bullet hit!");
                 enemy.health_points-=20;
-                
-                
-                
                 console.log(enemy.health_points);
                 
             }
@@ -114,15 +94,4 @@ Rx.Observable.interval(1).subscribe(function(){
     console.log(err)
 })
 
-//Remove killed enemy
-// Rx.Observable.interval(5).subscribe(function(){
-//     Enemies.forEach((enemy)=>{
-//         if(enemy.health_points <= 0)
-//         {
-//         }
-//     })
-//     },
-//     (err)=>{
-//         console.log(err)
-//     }
-// )
+
