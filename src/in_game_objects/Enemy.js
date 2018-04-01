@@ -40,10 +40,12 @@ export default class Enemy {
             // & unsubscribe from Observable
             
             let off_bottom_edge = TOP_OFFSET >= windowHeight - 50;
-
-            if(off_bottom_edge)
+            
+            //ako ima 0 onda je obrisan
+            if(off_bottom_edge && that.health_points > 0)
             {
                 this.unsubscribe();
+                console.log(that);
                 that.container.removeChild(that.dom_element);
                 return;
             }

@@ -73,7 +73,7 @@ export default class Player {
     
     firePower(){
         
-        let SPEED = 10;
+        let SPEED = 5;
         let MOVEMENT_SPEED = 5;
 
         let bullet = document.createElement("div");
