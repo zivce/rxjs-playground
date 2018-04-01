@@ -4,12 +4,15 @@ import '../styles/bullet.css'
 
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
+import fromPixelsToInt from '../utils/fromPixelsToInt';
 
 export default class Player {
     
     constructor(node){
         //simple init
+        this.score = 0;
         this.health_points = 100;
+        this.bullets = [];
         this.container = node;
         this.dom_element = document.createElement("div");
         this.dom_element.className = "player_fill";
@@ -36,6 +39,7 @@ export default class Player {
 
         //space pressed handled
         const spacebar_pressed = Rx.Observable.fromEvent(document,'keypress');
+
         spacebar_pressed.subscribe((keypressed_event)=>{
             if(keypressed_event.code === 'Space')
             {
@@ -69,7 +73,7 @@ export default class Player {
     
     firePower(){
         
-        let SPEED = 30;
+        let SPEED = 10;
         let MOVEMENT_SPEED = 5;
 
         let bullet = document.createElement("div");
@@ -78,26 +82,33 @@ export default class Player {
         bullet.style.bottom = "100px";
         
         this.container.appendChild(bullet);
-        let len = bullet.style.bottom.length;
+        this.bullets.push(bullet);
         
-        let bottom_offset = bullet.style.bottom.slice(0,len-2);
-        bottom_offset = new Number(bottom_offset);
-        let that = this;
+        let bottom_offset = fromPixelsToInt(bullet.style.bottom);
 
+        let that = this;
+        
         Rx.Observable.interval(SPEED)
             .subscribe(function(){
 
                 //player shooted
-
+                
                 bottom_offset += MOVEMENT_SPEED;
                 bullet.style.bottom = `${bottom_offset}px`;
 
                 let over_top_edge = bottom_offset >= window.innerHeight;
                 
+
+
                 if(over_top_edge)
                 {
                     this.unsubscribe();
                     that.container.removeChild(bullet);
+                    
+                    //Removing not visible bullet
+                    let remove_this_bullet_index = that.bullets.indexOf(bullet);
+                    that.bullets.splice(remove_this_bullet_index,1);
+
                     return;   
                 }
                 
