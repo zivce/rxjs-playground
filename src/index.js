@@ -94,7 +94,8 @@ Rx.Observable.interval(1).subscribe(function(){
 
                 if(parent != null)
                     parent.removeChild(bullet);
-
+                player.score += DIFFICULTY_ENEMY_HP_DESTRUCTION;
+                
                 enemy.health_points-= DIFFICULTY_ENEMY_HP_DESTRUCTION;
                 //console.log(enemy.health_points);
                 

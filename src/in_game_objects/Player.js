@@ -97,6 +97,12 @@ export default class Player {
                     // KIA
                     if(this.health_points <= 0)
                     {
+                        
+                        let p = document.createElement("h1");
+                        p.innerText=`GAME OVER! Your score is: ${this.score}`;
+                        p.className="game_over_txt_style";
+
+                        this.dom_element.parentNode.appendChild(p);
 
                         if(this.dom_element.parentNode != null)
                             this.dom_element.parentNode.removeChild(this.dom_element);
