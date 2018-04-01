@@ -83,7 +83,7 @@ Rx.Observable.interval(1).subscribe(function(){
             if(bullet_hit_enemy)
             {
                 // console.log("bullet hit!");
-                enemy.health_points-=20;
+                enemy.health_points-=10;
                 console.log(enemy.health_points);
                 
             }
