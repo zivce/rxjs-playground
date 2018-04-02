@@ -87,8 +87,9 @@ export default class Player {
 
                 let x_hit = ( Math.abs((player_rect.x + player_rect.width/2) - (enemy_rect.x+enemy_rect.width/2))) < 100;
 
-                let y_hit = Math.abs(enemy_rect.y - player_rect.y) === 0;
+                let y_hit = Math.abs(enemy_rect.y - player_rect.y) < 10;
 
+                
                 if(x_hit && y_hit)
                 {
                     console.log("enemy collision!");
@@ -103,7 +104,7 @@ export default class Player {
                         p.className="game_over_txt_style";
 
                         this.dom_element.parentNode.appendChild(p);
-
+                        debugger;
                         if(this.dom_element.parentNode != null)
                             this.dom_element.parentNode.removeChild(this.dom_element);
                         

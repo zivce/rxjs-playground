@@ -42,8 +42,8 @@ let player = new Player(wrapper);
 
 //Check for collision
 
-Rx.Observable.interval(10).subscribe(function(){
-    //console.log(player);
+Rx.Observable.interval(1).subscribe(function(){
+    
     let hp = player.listenerForCollision(Enemies);
 
     if(hp <= 0)
