@@ -7,3 +7,19 @@ body{
     width: 100%;
     height: 100%;
 }
+
+.buttons_group
+{
+    display:flex;
+    flex-direction: row;
+    margin: auto;
+    width: 40%;
+    height: 40px;
+}
+
+.btn_config
+{
+    width: 30%;
+    flex:1;
+
+}
