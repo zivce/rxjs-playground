@@ -132,9 +132,19 @@ io_promise
     //check if enemies are all gone,killed.
 
     Rx.Observable
-    .interval(1200)
+    .interval(1010)
     .subscribe(function(){
+        console.log("interval new");
         
+        Enemies
+            .filter((enemy)=>{
+                let enemy_rect = enemy.dom_element.getBoundingClientRect();
+                let enemy_in_game =  enemy_rect.x !== 0 ;
+                
+                return enemy_in_game;
+            })
+        
+
         if(Enemies.length === 0)
         {
             let game_over_text = document.createElement("h1");
@@ -200,9 +210,11 @@ io_promise
                     return;
                 }
                 
+               
 
                 let enemy_rect = enemy.dom_element.getBoundingClientRect();
                 
+               
 
                 let bullet_rect = bullet.getBoundingClientRect();
 
