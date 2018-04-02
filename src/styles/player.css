@@ -21,5 +21,20 @@
 
 .game_over_txt_style{
     text-align: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    
+}
+
+.player_score{
+    position: absolute;
+    left:0;
+    top:0;
+    font-weight: 800;
+
+}
+
+.hp_score{
+    position: absolute;
+    left:0;
+    top:20;
+    font-weight: 800;
 }

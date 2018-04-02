@@ -17,7 +17,7 @@ export default class Player {
         this.dom_element = document.createElement("div");
         this.dom_element.className = "player_fill";
         
-
+        let that = this;
 
         node.appendChild(this.dom_element);
         
@@ -67,7 +67,39 @@ export default class Player {
             },RETURN_TO_NORMAL_PLAYER);
             
         })
+        
+        let score_container = document.createElement("p");
+        score_container.className = "player_score";
+        node.appendChild(score_container);
 
+        let hp_container = document.createElement("p");
+        hp_container.className = "hp_score";
+        node.appendChild(hp_container);
+
+        //Update score 
+        Rx.Observable.interval(10).subscribe(function(){
+            score_container.innerHTML = `Score: ${that.score}`;
+            hp_container.innerHTML = `HP: ${that.health_points}`;
+            
+            let shown_game_over_txt = 
+            document.querySelector(".game_over_txt_style") !== null;
+
+            
+            if(shown_game_over_txt)
+            {   
+
+                const parent = score_container.parentNode;
+                if(parent !== null)
+                    parent.removeChild(score_container);
+                
+                const parenthp = hp_container.parentNode;
+                if(parenthp !== null)
+                    parenthp.removeChild(hp_container);
+
+                this.unsubscribe();
+            }
+
+        })
 
     }
 
@@ -75,7 +107,6 @@ export default class Player {
         enemies
             .filter((enemy)=>{
                 let en = enemy.dom_element.getBoundingClientRect();
-                //console.log(en);
                 let enemy_in_game = en.x !== 0 && en.y !== 0;
                 return enemy_in_game;
 
@@ -94,18 +125,24 @@ export default class Player {
                 
                 if(x_hit && y_hit)
                 {
-                    console.log("enemy collision!");
                     this.health_points -= 10;
-                    console.log(this.health_points);
                     // KIA
                     if(this.health_points <= 0)
                     {
                         
-                        let p = document.createElement("h1");
-                        p.innerText=`GAME OVER! Your score is: ${this.score}`;
-                        p.className="game_over_txt_style";
+                        let not_shown_game_over_txt = 
+                        document.querySelector(".game_over_txt_style") === null;
 
-                        this.dom_element.parentNode.appendChild(p);
+                        if(not_shown_game_over_txt)
+                        {
+                            let p = document.createElement("h1");
+                            p.innerText=`GAME OVER! Your score is: ${this.score}`;
+                            p.className="game_over_txt_style";
+                            this.dom_element.parentNode.appendChild(p);
+                        }
+                        
+
+                            
                         if(this.dom_element.parentNode != null)
                             this.dom_element.parentNode.removeChild(this.dom_element);
                         

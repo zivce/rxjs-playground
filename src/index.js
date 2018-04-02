@@ -10,7 +10,7 @@ import styles from './styles/styles.css';
 
 //container div
 let wrapper = document.createElement("div");
-wrapper.className="container";
+wrapper.className="container start_screen";
 document.body.appendChild(wrapper);
 
 
@@ -18,6 +18,13 @@ document.body.appendChild(wrapper);
 
 let buttons_group_cfg = document.createElement("div");
 buttons_group_cfg.className ="buttons_group";
+
+let difficulty = document.createElement("h2");
+difficulty.className="game_over_txt_style";
+difficulty.innerHTML = "Select difficulty below.";
+wrapper.appendChild(difficulty);
+
+
 
 let btn_easy = document.createElement("button");
 btn_easy.className = "btn_config";
@@ -39,6 +46,14 @@ btn_hard.innerHTML = "Hard";
 buttons_group_cfg.appendChild(btn_hard);
 
 wrapper.appendChild(buttons_group_cfg);
+
+
+let explanation = document.createElement("p");
+explanation.className="game_over_txt_style";
+explanation.innerHTML = "Press spacebar to shoot. Move mouse left-right to move the player.";
+wrapper.appendChild(explanation);
+
+
 
 //consts    
 let window_height = window.innerHeight - 50;
@@ -118,10 +133,24 @@ let io_promise = new Promise((resolve,reject)=>{
 //When difficulty selected proceed to starting game
 io_promise
 .then(()=>{
-
-    if(buttons_group_cfg.parentNode !== null)
+    const btns_parent = buttons_group_cfg.parentNode;
+    if( btns_parent !== null)
         buttons_group_cfg.parentNode.removeChild(buttons_group_cfg);
+    
+    const expla_parent = explanation.parentNode;
 
+    if(expla_parent !== null)
+    {
+        expla_parent.removeChild(explanation);
+    }
+
+    const diff_parent = difficulty.parentNode;
+
+    if(diff_parent !== null)
+    {
+        diff_parent.removeChild(difficulty);
+    }
+    
     console.log("start game");
 
     
@@ -135,6 +164,7 @@ io_promise
     .interval(1010)
     .subscribe(function(){
         
+        //gets in game enemies
         Enemies = Enemies
             .filter((enemy)=>{
                 let enemy_rect = enemy.dom_element.getBoundingClientRect();
@@ -143,13 +173,19 @@ io_promise
                 return enemy_in_game;
             })
 
-
         if(Enemies.length === 0)
         {
-            let game_over_text = document.createElement("h1");
-            game_over_text.innerText=`GAME OVER! Your score is: ${player.score}`;
-            game_over_text.className="game_over_txt_style";
-            wrapper.appendChild(game_over_text);
+            let not_shown_game_over_txt = 
+                document.querySelector(".game_over_txt_style") === null;
+
+            if(not_shown_game_over_txt)
+            {
+                let game_over_text = document.createElement("h1");
+                game_over_text.innerText=`GAME OVER! Your score is: ${player.score}`;
+                game_over_text.className="game_over_txt_style";
+                wrapper.appendChild(game_over_text);
+            }
+            
             this.unsubscribe();
         }
     })

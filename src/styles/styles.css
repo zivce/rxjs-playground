@@ -1,11 +1,18 @@
 body{
     background-color: aliceblue;
     overflow-y:hidden;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
     
 }
 .container{
     width: 100%;
-    height: 100%;
+    height: 50%;
+}
+
+.start_screen{
+    display: flex;
+    flex-direction: column;
+
 }
 
 .buttons_group
@@ -19,6 +26,9 @@ body{
 
 .btn_config
 {
+    font-size: 1.3rem;
+    font-weight: lighter;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
     width: 30%;
     flex:1;
 
