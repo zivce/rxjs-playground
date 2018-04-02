@@ -113,51 +113,9 @@ let io_promise = new Promise((resolve,reject)=>{
 
 
 })
-// btn_easy.onclick = (event)=>{
-//     fetch("http://localhost:3000/easy")
-//         .then((data)=>{            
-//             data.json().then((objJson)=>{
-//                 NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-//                 ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-//                 ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-//             })
-//             data_retrieved = true;
-
-//         })
-// }
 
 
-
-// btn_med.onclick = (event)=>{
-//     fetch("http://localhost:3000/medium")
-//         .then((data)=>{
-//             data.json().then((objJson)=>{
-//                 NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-//                 ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-//                 ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-//             })
-//             data_retrieved = true;
-//         })
-// }
-
-
-
-
-// btn_hard.onclick = (event)=>{
-//     fetch("http://localhost:3000/hard")
-//         .then((data)=>{
-//             data.json().then((objJson)=>{
-//                 NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-//                 ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-//                 ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-//             })
-
-//             data_retrieved = true;
-//         })
-// }
-
-console.log(io_promise);
-
+//When difficulty selected proceed to starting game
 io_promise
 .then(()=>{
 
@@ -165,23 +123,45 @@ io_promise
         buttons_group_cfg.parentNode.removeChild(buttons_group_cfg);
 
     console.log("start game");
+
+    
+    //player has joined the game
+    let player = new Player(wrapper);
+
+
+    //check if enemies are all gone,killed.
+
+    Rx.Observable
+    .interval(1200)
+    .subscribe(function(){
+        
+        if(Enemies.length === 0)
+        {
+            let game_over_text = document.createElement("h1");
+            game_over_text.innerText=`GAME OVER! Your score is: ${player.score}`;
+            game_over_text.className="game_over_txt_style";
+            wrapper.appendChild(game_over_text);
+
+            this.unsubscribe();
+        }
+    })
+    
+
+
     //generating enemies
     Rx.Observable.interval(1000)
         .subscribe(function(){
             Enemies.push(new Enemy(wrapper));
             Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
-            I++
+            I++;
+
             if(I === NUMBER_ENEMIES)
                 this.unsubscribe();
-
         },
         (err)=>{
             console.log(err)
         })
     
-
-    //player has joined the game
-    let player = new Player(wrapper);
 
     //Check for collision
 
@@ -199,7 +179,9 @@ io_promise
 
     //shots hit the target  
     Rx.Observable.interval(1).subscribe(function(){
-        
+
+       
+
         player.bullets.forEach(function(bullet){
             Enemies.forEach(function(enemy){
 
@@ -209,7 +191,12 @@ io_promise
                 {
                     let remove_enemy_index = Enemies.indexOf(enemy);
                     Enemies.splice(remove_enemy_index,1);
-                    enemy.dom_element.parentNode.removeChild(enemy.dom_element);
+                    const enemy_parent = enemy.dom_element.parentNode;
+                    
+
+                    if(enemy_parent != null)
+                        enemy_parent.removeChild(enemy.dom_element);
+                    
                     return;
                 }
                 

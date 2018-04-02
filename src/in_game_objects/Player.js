@@ -72,7 +72,6 @@ export default class Player {
     }
 
     listenerForCollision(enemies){
-        
         enemies
             .filter((enemy)=>{
                 let en = enemy.dom_element.getBoundingClientRect();
@@ -81,7 +80,10 @@ export default class Player {
                 return enemy_in_game;
 
             })
-            .forEach((enemy)=>{
+
+           
+            
+        enemies.forEach((enemy)=>{
                 let enemy_rect = enemy.dom_element.getBoundingClientRect();
                 let player_rect = this.dom_element.getBoundingClientRect();
 
@@ -104,7 +106,6 @@ export default class Player {
                         p.className="game_over_txt_style";
 
                         this.dom_element.parentNode.appendChild(p);
-                        debugger;
                         if(this.dom_element.parentNode != null)
                             this.dom_element.parentNode.removeChild(this.dom_element);
                         
