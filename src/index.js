@@ -134,16 +134,15 @@ io_promise
     Rx.Observable
     .interval(1010)
     .subscribe(function(){
-        console.log("interval new");
         
-        Enemies
+        Enemies = Enemies
             .filter((enemy)=>{
                 let enemy_rect = enemy.dom_element.getBoundingClientRect();
                 let enemy_in_game =  enemy_rect.x !== 0 ;
                 
                 return enemy_in_game;
             })
-        
+
 
         if(Enemies.length === 0)
         {
@@ -151,7 +150,6 @@ io_promise
             game_over_text.innerText=`GAME OVER! Your score is: ${player.score}`;
             game_over_text.className="game_over_txt_style";
             wrapper.appendChild(game_over_text);
-
             this.unsubscribe();
         }
     })
