@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --watch --mode development --hide-modules",
-    "devsrv":"webpack-dev-server.cmd --mode development --open-page ",
+    "devsrv":"webpack-dev-server.cmd --mode development --open-page / ",
+    "srvcfg":"json-server --watch config.db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   

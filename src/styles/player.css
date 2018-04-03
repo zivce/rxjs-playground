@@ -29,6 +29,7 @@
     left:0;
     top:0;
     font-weight: 800;
+    color:rgba(255, 0, 0, 0.664);
 
 }
 
@@ -37,4 +38,6 @@
     left:0;
     top:20;
     font-weight: 800;
+    
+    color:rgba(255, 0, 0, 0.664);
 }
