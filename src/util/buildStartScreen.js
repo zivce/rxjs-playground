@@ -12,8 +12,22 @@ export default function(wrapper){
 
     let difficulty = document.createElement("h2");
     difficulty.className="game_over_txt_style";
-    difficulty.innerHTML = "Select difficulty below.";
+    difficulty.innerHTML = "Insert username & select difficulty.";
     wrapper.appendChild(difficulty);
+
+    let player_name = document.createElement("div");
+    player_name.className ="player_container";
+    
+    let label_player = document.createElement("p");
+    label_player.innerHTML = "Insert username: ";
+    player_name.appendChild(label_player);
+
+    let input_player = document.createElement("input");
+    player_name.appendChild(input_player);
+
+    wrapper.appendChild(player_name);
+
+
 
 
 
@@ -50,7 +64,9 @@ export default function(wrapper){
         hard : btn_hard,
         btns: buttons_group_cfg,
         expl : explanation,
-        diff : difficulty
+        diff : difficulty,
+        input_player:input_player,
+        text_player : label_player
     }
 }   
 

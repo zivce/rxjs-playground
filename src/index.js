@@ -40,62 +40,85 @@ let I = 0 ;
 
 
 let io_promise = new Promise((resolve,reject)=>{
+    // let username_empty = start_screen_elems.input_player.innerHTML === "";
+    // Rx.Observable.interval(100).subscribe(function(){
+        // let observer = this;
 
-    setTimeout(()=>{
-        //do ajax here 
-        start_screen_elems.easy.onclick = (event)=>{
-            fetch("http://localhost:3000/easy")
-                .then((data)=>{            
-                    data.json().then((objJson)=>{
-                        NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                        ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-                        ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-                    })
+        // setTimeout(()=>{
+            //do ajax here 
+            start_screen_elems.easy.onclick = (event)=>{
+                fetch("http://localhost:3000/easy")
+                    .then((data)=>{            
+                        data.json().then((objJson)=>{
+                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                            ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
+                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                        })
+                        
+                    //after fetched proceed to game     
                     
-                //after fetched proceed to game     
-                resolve();
+                    // if(username_empty)
+                        // reject();
+                    // else 
+                    // {
+                        // observer.unsubscribe();
+                        resolve();
+                    // }
 
-        
                 })
-        }
-        
-        
-        
-        start_screen_elems.med.onclick = (event)=>{
-            fetch("http://localhost:3000/medium")
-                .then((data)=>{
-                    data.json().then((objJson)=>{
-                        NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                        ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-                        ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+            }
+            
+            
+            
+            start_screen_elems.med.onclick = (event)=>{
+                fetch("http://localhost:3000/medium")
+                    .then((data)=>{
+                        data.json().then((objJson)=>{
+                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                            ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
+                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                        })
+                        
+                    //after fetched proceed to game     
+                     // if(username_empty)
+                        // reject();
+                    // else 
+                    // {
+                        // observer.unsubscribe();
+                        resolve();
+                    // }
+
                     })
+
+            }
+            
+            
+            
+            
+            start_screen_elems.hard.onclick = (event)=>{
+                fetch("http://localhost:3000/hard")
+                    .then((data)=>{
+                        data.json().then((objJson)=>{
+                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                            ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
+                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                        })
+
+                    //after fetched proceed to game   
                     
-                //after fetched proceed to game     
-                resolve();
-
+                    // if(username_empty)
+                        // reject();
+                    // else 
+                    // {
+                        // observer.unsubscribe();
+                        resolve();
+                    // }
                 })
+            }
 
-        }
+        // },1000)
         
-        
-        
-        
-        start_screen_elems.hard.onclick = (event)=>{
-            fetch("http://localhost:3000/hard")
-                .then((data)=>{
-                    data.json().then((objJson)=>{
-                        NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                        ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-                        ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-                    })
-
-                //after fetched proceed to game     
-                resolve();
-
-                })
-        }
-
-    },1000)
+    // })
 
 
 })
@@ -243,8 +266,11 @@ let game_over = new Promise((resolve,reject)=>{
         (err)=>{
             console.log(err)
         })
+    },
+    //reject
+    ()=>{
+        alert("Popuni input!");
     })
-
 })
 
 //building screen after game done 
