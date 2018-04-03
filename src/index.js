@@ -1,12 +1,15 @@
 //in game objects
 import Enemy from './in_game_objects/Enemy';
 import Player from './in_game_objects/Player';
-
+import removeDomElement from './util/removeElem';
+import buildStartScreen from './util/buildStartScreen';
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
 
 //styles
 import styles from './styles/styles.css';
+
+
 
 //container div
 let wrapper = document.createElement("div");
@@ -14,44 +17,7 @@ wrapper.className="container start_screen";
 document.body.appendChild(wrapper);
 
 
-//select difficulty
-
-let buttons_group_cfg = document.createElement("div");
-buttons_group_cfg.className ="buttons_group";
-
-let difficulty = document.createElement("h2");
-difficulty.className="game_over_txt_style";
-difficulty.innerHTML = "Select difficulty below.";
-wrapper.appendChild(difficulty);
-
-
-
-let btn_easy = document.createElement("button");
-btn_easy.className = "btn_config";
-btn_easy.innerHTML = "Easy";
-buttons_group_cfg.appendChild(btn_easy);
-
-
-let btn_med = document.createElement("button");
-btn_med.className = "btn_config";
-btn_med.innerHTML = "Medium";
-
-buttons_group_cfg.appendChild(btn_med);
-
-
-let btn_hard = document.createElement("button");
-btn_hard.className = "btn_config";
-btn_hard.innerHTML = "Hard";
-
-buttons_group_cfg.appendChild(btn_hard);
-
-wrapper.appendChild(buttons_group_cfg);
-
-
-let explanation = document.createElement("p");
-explanation.className="game_over_txt_style";
-explanation.innerHTML = "Press spacebar to shoot. Move mouse left-right to move the player.";
-wrapper.appendChild(explanation);
+let start_screen_elems = buildStartScreen(wrapper);
 
 
 
@@ -72,7 +38,7 @@ let io_promise = new Promise((resolve,reject)=>{
 
     setTimeout(()=>{
         //do ajax here 
-        btn_easy.onclick = (event)=>{
+        start_screen_elems.easy.onclick = (event)=>{
             fetch("http://localhost:3000/easy")
                 .then((data)=>{            
                     data.json().then((objJson)=>{
@@ -90,7 +56,7 @@ let io_promise = new Promise((resolve,reject)=>{
         
         
         
-        btn_med.onclick = (event)=>{
+        start_screen_elems.med.onclick = (event)=>{
             fetch("http://localhost:3000/medium")
                 .then((data)=>{
                     data.json().then((objJson)=>{
@@ -109,7 +75,7 @@ let io_promise = new Promise((resolve,reject)=>{
         
         
         
-        btn_hard.onclick = (event)=>{
+        start_screen_elems.hard.onclick = (event)=>{
             fetch("http://localhost:3000/hard")
                 .then((data)=>{
                     data.json().then((objJson)=>{
@@ -133,24 +99,15 @@ let io_promise = new Promise((resolve,reject)=>{
 //When difficulty selected proceed to starting game
 io_promise
 .then(()=>{
-    const btns_parent = buttons_group_cfg.parentNode;
-    if( btns_parent !== null)
-        buttons_group_cfg.parentNode.removeChild(buttons_group_cfg);
-    
-    const expla_parent = explanation.parentNode;
 
-    if(expla_parent !== null)
+
+    //remove start screen 
+    
+    for(let prop in start_screen_elems)
     {
-        expla_parent.removeChild(explanation);
+        removeDomElement(start_screen_elems[prop]);
     }
 
-    const diff_parent = difficulty.parentNode;
-
-    if(diff_parent !== null)
-    {
-        diff_parent.removeChild(difficulty);
-    }
-    
     console.log("start game");
 
     

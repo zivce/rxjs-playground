@@ -45,7 +45,15 @@ export default class Player {
             {
                 this.firePower();
             }
+            
+            let shown_game_over_txt = 
+            document.querySelector(".game_over_txt_style") !== null;
+
+            if(shown_game_over_txt)
+                this.unsubscribe();
+
         })
+
 
         //vars used in subscription below
         let thisPlayer = this;
