@@ -7,7 +7,7 @@
     "build": "webpack --watch --mode development --hide-modules",
     "devsrv":"webpack-dev-server.cmd --mode development --port 1111 --open-page / ",
     "srvcfg":"json-server --watch config.db.json",
-    "srvscores":"json-server --watch scores.db.json",
+    "srvscores":"json-server --watch scores.db.json -p 3001",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   

@@ -40,13 +40,28 @@ let I = 0 ;
 
 
 let io_promise = new Promise((resolve,reject)=>{
-    // let username_empty = start_screen_elems.input_player.innerHTML === "";
-    // Rx.Observable.interval(100).subscribe(function(){
-        // let observer = this;
+    let username = "";
+
+    let username_empty;
+    Rx.Observable.interval(10).subscribe(function(){
+        username_empty = start_screen_elems.input_player.value === "";
+    })
+
 
         setTimeout(()=>{
             //do ajax here 
             start_screen_elems.easy.onclick = (event)=>{
+                
+                if(username_empty)
+                {
+                    start_screen_elems.input_player.placeholder = "Fill the input";
+                    return;
+                }
+                else
+                {
+                    username = start_screen_elems.input_player.value;
+                }
+
                 fetch("http://localhost:3000/easy")
                     .then((data)=>{            
                         data.json().then((objJson)=>{
@@ -62,7 +77,7 @@ let io_promise = new Promise((resolve,reject)=>{
                     // else 
                     // {
                         // observer.unsubscribe();
-                        resolve();
+                        resolve(username);
                     // }
 
                 })
@@ -71,6 +86,17 @@ let io_promise = new Promise((resolve,reject)=>{
             
             
             start_screen_elems.med.onclick = (event)=>{
+                 
+                if(username_empty)
+                {
+                    start_screen_elems.input_player.placeholder = "Fill the input";
+                    return;
+                }
+                else
+                {
+                    username = start_screen_elems.input_player.value;
+                }
+
                 fetch("http://localhost:3000/medium")
                     .then((data)=>{
                         data.json().then((objJson)=>{
@@ -85,7 +111,7 @@ let io_promise = new Promise((resolve,reject)=>{
                     // else 
                     // {
                         // observer.unsubscribe();
-                        resolve();
+                        resolve(username);
                     // }
 
                     })
@@ -96,6 +122,19 @@ let io_promise = new Promise((resolve,reject)=>{
             
             
             start_screen_elems.hard.onclick = (event)=>{
+                
+                 
+                if(username_empty)
+                {
+                    start_screen_elems.input_player.placeholder = "Fill the input";
+                    return;
+                }
+                else
+                {
+                    username = start_screen_elems.input_player.value;
+                }
+
+
                 fetch("http://localhost:3000/hard")
                     .then((data)=>{
                         data.json().then((objJson)=>{
@@ -111,14 +150,13 @@ let io_promise = new Promise((resolve,reject)=>{
                     // else 
                     // {
                         // observer.unsubscribe();
-                        resolve();
+                        resolve(username);
                     // }
                 })
             }
 
         },1000)
         
-    // })
 
 
 })
@@ -127,9 +165,9 @@ let game_over = new Promise((resolve,reject)=>{
 
     //When difficulty selected proceed to starting game
     io_promise
-    .then(()=>{
+    .then((username)=>{
 
-
+        
         //remove start screen 
         
         for(let prop in start_screen_elems)
@@ -173,7 +211,7 @@ let game_over = new Promise((resolve,reject)=>{
                     wrapper.appendChild(game_over_text);
                     
                     //start building end screen
-                    resolve();
+                    resolve(username);
                 }
 
 
@@ -193,6 +231,12 @@ let game_over = new Promise((resolve,reject)=>{
 
                 if(I === NUMBER_ENEMIES)
                     this.unsubscribe();
+
+                if(player.health_points === 0)
+                {
+                    this.unsubscribe();
+                    resolve(username); 
+                }
             },
             (err)=>{
                 console.log(err)
@@ -208,7 +252,7 @@ let game_over = new Promise((resolve,reject)=>{
             if(player_killed)
             {
                 this.unsubscribe();    
-                resolve();            
+                resolve(username);            
             }
         })
 
@@ -274,8 +318,13 @@ let game_over = new Promise((resolve,reject)=>{
 })
 
 //building screen after game done 
-game_over.then(()=>{
-    buildEndScreen(wrapper);
+game_over.then((username)=>{
+    console.log(username);
+    window.setTimeout(
+        ()=>{
+            buildEndScreen(wrapper);
+        },1000
+    )
 
 })
 

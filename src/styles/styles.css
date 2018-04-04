@@ -33,7 +33,10 @@ body{
     font-weight: bold;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
-
+::placeholder{
+    color:red;
+    opacity: 1;
+}
 .buttons_group
 {
     display:flex;

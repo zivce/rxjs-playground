@@ -15,6 +15,7 @@ export default function(wrapper){
     difficulty.innerHTML = "Insert username & select difficulty.";
     wrapper.appendChild(difficulty);
 
+
     let player_name = document.createElement("div");
     player_name.className ="player_container";
     
@@ -24,7 +25,6 @@ export default function(wrapper){
 
     let input_player = document.createElement("input");
     player_name.appendChild(input_player);
-
     wrapper.appendChild(player_name);
 
 
@@ -67,7 +67,7 @@ export default function(wrapper){
         expl : explanation,
         diff : difficulty,
         input_player:input_player,
-        text_player : label_player
+        text_player : label_player,
     }
 }   
 
