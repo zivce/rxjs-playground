@@ -18,7 +18,6 @@ import styles from './styles/styles.css';
 
 //container div
 let wrapper = document.createElement("div");
-wrapper.className="container start_screen";
 document.body.appendChild(wrapper);
 
 

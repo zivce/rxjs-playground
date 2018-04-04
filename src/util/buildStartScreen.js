@@ -68,6 +68,7 @@ export default function(wrapper){
         diff : difficulty,
         input_player:input_player,
         text_player : label_player,
+        player_name:player_name
     }
 }   
 
