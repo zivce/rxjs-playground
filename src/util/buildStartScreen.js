@@ -57,7 +57,8 @@ export default function(wrapper){
     explanation.className="game_over_txt_style";
     explanation.innerHTML = "Press spacebar to shoot. Move mouse left-right to move the player.";
     wrapper.appendChild(explanation);
-
+    
+    //all elements returned
     return {
         easy : btn_easy,
         med : btn_med,

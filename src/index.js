@@ -44,7 +44,7 @@ let io_promise = new Promise((resolve,reject)=>{
     // Rx.Observable.interval(100).subscribe(function(){
         // let observer = this;
 
-        // setTimeout(()=>{
+        setTimeout(()=>{
             //do ajax here 
             start_screen_elems.easy.onclick = (event)=>{
                 fetch("http://localhost:3000/easy")
@@ -116,7 +116,7 @@ let io_promise = new Promise((resolve,reject)=>{
                 })
             }
 
-        // },1000)
+        },1000)
         
     // })
 

@@ -2,6 +2,11 @@
 import '../styles/player.css';
 import '../styles/bullet.css'
 
+//utils 
+import removeDomElement from '../util/removeElem';
+
+
+//rx components
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
 
@@ -40,10 +45,10 @@ export default class Player {
         //space pressed handled
         const spacebar_pressed = Rx.Observable.fromEvent(document,'keypress');
 
-        spacebar_pressed.subscribe((keypressed_event)=>{
+        spacebar_pressed.subscribe(function(keypressed_event){
             if(keypressed_event.code === 'Space')
             {
-                this.firePower();
+                that.firePower();
             }
             
             let shown_game_over_txt = 
@@ -96,13 +101,8 @@ export default class Player {
             if(shown_game_over_txt)
             {   
 
-                const parent = score_container.parentNode;
-                if(parent !== null)
-                    parent.removeChild(score_container);
-                
-                const parenthp = hp_container.parentNode;
-                if(parenthp !== null)
-                    parenthp.removeChild(hp_container);
+                removeDomElement(score_container);
+                removeDomElement(hp_container);
 
                 this.unsubscribe();
             }
@@ -150,10 +150,8 @@ export default class Player {
                         }
                         
 
-                            
-                        if(this.dom_element.parentNode != null)
-                            this.dom_element.parentNode.removeChild(this.dom_element);
-                        
+                        removeDomElement(this.dom_element);
+
                     }
                         
                 }
@@ -193,11 +191,10 @@ export default class Player {
                 if(over_top_edge)
                 {
                     this.unsubscribe();
-                    const parent = bullet.parentNode;
 
-                    if(parent !== null)
-                        parent.removeChild(bullet);
-                    
+
+                    removeDomElement(bullet);
+
                     //Removing not visible bullet
                     let remove_this_bullet_index = that.bullets.indexOf(bullet);
                     that.bullets.splice(remove_this_bullet_index,1);

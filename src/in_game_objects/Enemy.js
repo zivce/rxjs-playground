@@ -1,4 +1,5 @@
 import  '../styles/enemy.css';
+import removeDomElement from '../util/removeElem';
 
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
@@ -50,7 +51,7 @@ export default class Enemy {
             {
                 this.unsubscribe();
                 //console.log(that);
-                that.container.removeChild(that.dom_element);
+                removeDomElement(that.dom_element);
                 return;
             }
         });
