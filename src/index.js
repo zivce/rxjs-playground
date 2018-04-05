@@ -6,6 +6,7 @@ import removeDomElement from './util/removeElem';
 //utils
 import buildStartScreen from './util/buildStartScreen';
 import buildEndScreen from './util/buildEndScreen';
+import checkUsername from './util/checkUsername';
 
 //Rx modules
 import Rx from 'rxjs';
@@ -48,113 +49,125 @@ let io_promise = new Promise((resolve,reject)=>{
     })
 
 
-        setTimeout(()=>{
-            //do ajax here 
-            start_screen_elems.easy.onclick = (event)=>{
-                
-                if(username_empty)
-                {
-                    start_screen_elems.input_player.placeholder = "Fill the input";
-                    return;
-                }
-                else
-                {
-                    username = start_screen_elems.input_player.value;
-                    let username_in_use = false;
+    setTimeout(()=>{
+        //do ajax here 
+        start_screen_elems.easy.onclick = (event)=>{
+            
+            if(username_empty)
+            {
+                start_screen_elems.input_player.placeholder = "Fill the input";
+                return;
+            }
+            else
+            {                    
+                username = start_screen_elems.input_player.value;
 
-                    fetch('http://localhost:3001/scores')
-                        .then((data)=>{
-                            data.json().then((objJson)=>{
-                              objJson.forEach((player)=>{
-                                  console.log(player);
-                                  console.log(username);
-
-                                  if(username === player.username)
-                                    username_in_use = true;
-                              })  
-                            })
-                        })
-                    
-                    console.log(username_in_use)
-
-                    if(username_in_use)
+                checkUsername(username).then((user_in_use)=>{
+                    if(user_in_use)
                     {
                         start_screen_elems.input_player.value = "";
-                        start_screen_elems.input_player.placeholder = 
-                        "Username in use!";
-                        return;
+                        start_screen_elems.input_player.placeholder = "Insert other username";
                     }
-                }
-
-                fetch("http://localhost:3000/easy")
-                    .then((data)=>{            
-                        data.json().then((objJson)=>{
-                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                            ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                    else 
+                    {
+                        fetch("http://localhost:3000/easy")
+                        .then((data)=>{            
+                            data.json().then((objJson)=>{
+                                NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                                ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
+                                ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                            })
+                            
+                            resolve(username);
+    
                         })
-                        
-                        resolve(username);
-
+                    }
                 })
             }
-            
-            
-            
-            start_screen_elems.med.onclick = (event)=>{
-                 
-                if(username_empty)
-                {
-                    start_screen_elems.input_player.placeholder = "Fill the input";
-                    return;
-                }
-                else
-                {
-                    username = start_screen_elems.input_player.value;
-                }
 
-                fetch("http://localhost:3000/medium")
-                    .then((data)=>{
-                        data.json().then((objJson)=>{
-                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                            ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-                        })
-                        
-                        resolve(username);
-
-                    })
-
+        
+        }
+        
+        
+        
+        start_screen_elems.med.onclick = (event)=>{
+            
+            if(username_empty)
+            {
+                start_screen_elems.input_player.placeholder = "Fill the input";
+                return;
             }
-            
-            
-            
-            
-            start_screen_elems.hard.onclick = (event)=>{
+            else
+            {
+
+                username = start_screen_elems.input_player.value;
                 
-                 
-                if(username_empty)
-                {
-                    start_screen_elems.input_player.placeholder = "Fill the input";
-                    return;
-                }
-                else
-                {
-                    username = start_screen_elems.input_player.value;
-                }
-
-
-                fetch("http://localhost:3000/hard")
-                    .then((data)=>{
-                        data.json().then((objJson)=>{
-                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                            ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
-                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                checkUsername(username).then((user_in_use)=>{
+                    if(user_in_use)
+                    {
+                        start_screen_elems.input_player.value = "";
+                        start_screen_elems.input_player.placeholder = "Insert other username";
+                    }
+                    else 
+                    {
+                        fetch("http://localhost:3000/medium")
+                        .then((data)=>{            
+                            data.json().then((objJson)=>{
+                                NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                                ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
+                                ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                            })
+                            
+                            resolve(username);
+    
                         })
-
-                        resolve(username);
+                    }
                 })
+
+
             }
+
+
+        }
+        
+        
+        
+        
+        start_screen_elems.hard.onclick = (event)=>{
+            
+            
+            if(username_empty)
+            {
+                start_screen_elems.input_player.placeholder = "Fill the input";
+                return;
+            }
+            else
+            {
+                username = start_screen_elems.input_player.value;
+                
+                checkUsername(username).then((user_in_use)=>{
+                    if(user_in_use)
+                    {
+                        start_screen_elems.input_player.value = "";
+                        start_screen_elems.input_player.placeholder = "Insert other username";
+                    }
+                    else 
+                    {
+                        fetch("http://localhost:3000/hard")
+                        .then((data)=>{            
+                            data.json().then((objJson)=>{
+                                NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                                ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
+                                ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
+                            })
+                            resolve(username);
+                        })
+                    }
+                })
+
+            }
+
+        }
 
         },1000)
         
@@ -349,7 +362,11 @@ game_over.then((player)=>{
         })
         .then(res => res.json())
         .catch(err => console.error('Error: ', err))
-        .then(response => console.log('Success: ',response));
+        .then(response => 
+            {
+                alert('Score saved!');
+                removeDomElement(end_screen_elems.save);
+            });
 
     }
 
