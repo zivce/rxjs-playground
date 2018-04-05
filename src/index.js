@@ -331,7 +331,57 @@ game_over.then((player)=>{
         window.location.reload(true);
     }
 
-    end_screen_elems.save.onclick = ()=>{
+    const scores = end_screen_elems.table_scores;
+
+    fetch("http://localhost:3001/scores")
+        .then((resp) => {return resp.json()})
+        .then((scores_arr)=>{
+
+            let desc = (score1,score2)=>{
+                return score2.score - score1.score;
+            };
+
+            scores_arr.sort(desc);
+            
+            let table_body = scores.getElementsByTagName("tbody");
+            table_body = table_body[0];
+            let rank = 0;
+
+            const mapped_arr = scores_arr.map((score)=>{
+                rank++;
+                return {
+                    rank: rank, 
+                    user: score.username,
+                    score : `${score.score}pts` 
+                }
+            })
+            
+            console.log(mapped_arr);
+
+            mapped_arr.forEach((user_info)=>{
+                let tr = document.createElement("tr");
+                
+                let td_rank = document.createElement("td");
+                td_rank.innerHTML = user_info.rank;
+                tr.appendChild(td_rank);
+
+                let td_user = document.createElement("td");
+                td_user.innerHTML = user_info.user;
+                tr.appendChild(td_user);
+            
+                let td_score = document.createElement("td");
+                td_score.innerHTML = user_info.score;
+                tr.appendChild(td_score);
+
+                table_body.appendChild(tr);
+            })
+
+        })
+
+
+    const save_button = end_screen_elems.save;
+    
+    save_button.onclick = ()=>{
         let user =  player.username;
         let score = player.score;
 
@@ -355,8 +405,8 @@ game_over.then((player)=>{
             {
                 alert('Score saved!');
                 removeDomElement(end_screen_elems.save);
+                fetchAgain();
             });
-
     }
 
 })

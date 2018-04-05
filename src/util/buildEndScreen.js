@@ -25,9 +25,41 @@ export default function(wrapper,player){
     buttons_group_end.appendChild(btn_new);
 
     wrapper.appendChild(buttons_group_end);
+    
 
+    let table_scores = document.createElement("table");
+    table_scores.className = "table_scores";
+
+    let thead = document.createElement("thead");
+
+    let tr = document.createElement("tr");
+    thead.appendChild(tr);
+
+    let th3 = document.createElement("th");
+    th3.innerHTML = "Ranking";
+    tr.appendChild(th3);
+
+    let th1 = document.createElement("th");
+    th1.innerHTML = "Username";
+    tr.appendChild(th1);
+
+
+    let th2 = document.createElement("th");
+    th2.innerHTML = "Scores";
+    tr.appendChild(th2);
+
+
+    table_scores.appendChild(thead);
+    
+    let tbody = document.createElement("tbody");
+    tbody.className = "scores_body";
+    
+    table_scores.appendChild(tbody);
+
+    wrapper.appendChild(table_scores);
 
     return {
+        table_scores:table_scores,
         save:btn_save,
         new:btn_new,
     }
@@ -35,16 +67,3 @@ export default function(wrapper,player){
 
 
 
-
-// var url = 'https://example.com/profile';
-// var data = {username: 'example'};
-
-// fetch(url, {
-//   method: 'POST', // or 'PUT'
-//   body: JSON.stringify(data), // data can be `string` or {object}!
-//   headers: new Headers({
-//     'Content-Type': 'application/json'
-//   })
-// }).then(res => res.json())
-// .catch(error => console.error('Error:', error))
-// .then(response => console.log('Success:', response));
