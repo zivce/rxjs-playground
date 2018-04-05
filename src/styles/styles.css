@@ -45,6 +45,15 @@ body{
     width: 40%;
     height: 40px;
 }
+.btn_easy{
+    flex:1;    
+}
+.btn_hard{
+    flex:1;
+}
+.btn_medium{
+    flex:2;
+}
 
 .btn_config
 {
@@ -52,6 +61,5 @@ body{
     font-weight: lighter;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
     width: 30%;
-    flex:1;
 
 }

@@ -1,6 +1,14 @@
 {
-    "scores":[
-        
-    ]
+  "scores": [
+    {
+      "score": 200,
+      "username": "r",
+      "id": 2
+    },
+    {
+      "score": 0,
+      "username": "rr",
+      "id": 3
+    }
+  ]
 }
-

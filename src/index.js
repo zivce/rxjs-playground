@@ -60,6 +60,30 @@ let io_promise = new Promise((resolve,reject)=>{
                 else
                 {
                     username = start_screen_elems.input_player.value;
+                    let username_in_use = false;
+
+                    fetch('http://localhost:3001/scores')
+                        .then((data)=>{
+                            data.json().then((objJson)=>{
+                              objJson.forEach((player)=>{
+                                  console.log(player);
+                                  console.log(username);
+
+                                  if(username === player.username)
+                                    username_in_use = true;
+                              })  
+                            })
+                        })
+                    
+                    console.log(username_in_use)
+
+                    if(username_in_use)
+                    {
+                        start_screen_elems.input_player.value = "";
+                        start_screen_elems.input_player.placeholder = 
+                        "Username in use!";
+                        return;
+                    }
                 }
 
                 fetch("http://localhost:3000/easy")
@@ -70,15 +94,7 @@ let io_promise = new Promise((resolve,reject)=>{
                             ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                         })
                         
-                    //after fetched proceed to game     
-                    
-                    // if(username_empty)
-                        // reject();
-                    // else 
-                    // {
-                        // observer.unsubscribe();
                         resolve(username);
-                    // }
 
                 })
             }
@@ -105,14 +121,7 @@ let io_promise = new Promise((resolve,reject)=>{
                             ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                         })
                         
-                    //after fetched proceed to game     
-                     // if(username_empty)
-                        // reject();
-                    // else 
-                    // {
-                        // observer.unsubscribe();
                         resolve(username);
-                    // }
 
                     })
 
@@ -143,15 +152,7 @@ let io_promise = new Promise((resolve,reject)=>{
                             ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                         })
 
-                    //after fetched proceed to game   
-                    
-                    // if(username_empty)
-                        // reject();
-                    // else 
-                    // {
-                        // observer.unsubscribe();
                         resolve(username);
-                    // }
                 })
             }
 
@@ -315,14 +316,42 @@ let game_over = new Promise((resolve,reject)=>{
 
 //building screen after game done 
 game_over.then((player)=>{
-    
-    console.log(player);
 
     window.setTimeout(
-        ()=>{
-            buildEndScreen(wrapper,player.username);
-        },1000
+        ()=>{},1000
     )
+
+    let end_screen_elems = {};
+
+    end_screen_elems = buildEndScreen(wrapper,player);
+    
+    end_screen_elems.new.onclick = ()=>{
+        window.location.reload(true);
+    }
+
+    end_screen_elems.save.onclick = ()=>{
+        let user =  player.username;
+        let score = player.score;
+
+        let score_for_save = 
+        {
+            score : score,
+            username : user
+
+        }
+
+        fetch('http://localhost:3001/scores',{
+            method:'POST',
+            body: JSON.stringify(score_for_save),
+            headers: new Headers({
+                'Content-Type' : 'application/json'
+            })
+        })
+        .then(res => res.json())
+        .catch(err => console.error('Error: ', err))
+        .then(response => console.log('Success: ',response));
+
+    }
 
 })
 

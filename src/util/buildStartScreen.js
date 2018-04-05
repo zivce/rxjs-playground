@@ -32,20 +32,20 @@ export default function(wrapper){
 
 
     let btn_easy = document.createElement("button");
-    btn_easy.className = "btn_config";
+    btn_easy.className = "btn_config btn_easy";
     btn_easy.innerHTML = "Easy";
     buttons_group_cfg.appendChild(btn_easy);
 
 
     let btn_med = document.createElement("button");
-    btn_med.className = "btn_config";
+    btn_med.className = "btn_config btn_medium";
     btn_med.innerHTML = "Medium";
 
     buttons_group_cfg.appendChild(btn_med);
 
 
     let btn_hard = document.createElement("button");
-    btn_hard.className = "btn_config";
+    btn_hard.className = "btn_config btn_hard";
     btn_hard.innerHTML = "Hard";
 
     buttons_group_cfg.appendChild(btn_hard);
@@ -68,7 +68,8 @@ export default function(wrapper){
         diff : difficulty,
         input_player:input_player,
         text_player : label_player,
-        player_name:player_name
+        player_name:player_name,
+        wrapper: wrapper
     }
 }   
 
