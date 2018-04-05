@@ -207,29 +207,12 @@ let game_over = new Promise((resolve,reject)=>{
                 .filter((enemy)=>{
                     let enemy_rect = enemy.dom_element.getBoundingClientRect();
                     let enemy_in_game =  enemy_rect.x !== 0 ;
-                    
                     return enemy_in_game;
                 })
 
             if(Enemies.length === 0)
             {
-                // let not_shown_game_over_txt = 
-                //     document.querySelector(".game_over_txt_style") === null;
-                
-                // //all enemies killed
-                // if(not_shown_game_over_txt)
-                // {
-                //     let game_over_text = document.createElement("h1");
-                //     game_over_text.innerText=`GAME OVER! Your score is: ${player.score}`;
-                //     game_over_text.className="game_over_txt_style";
-                //     wrapper.appendChild(game_over_text);
-                    
-                //     //start building end screen
-                // }
-
-
                 resolve(player);
-
                 this.unsubscribe();
             }
         })
@@ -239,18 +222,24 @@ let game_over = new Promise((resolve,reject)=>{
         //generating enemies
         Rx.Observable.interval(1000)
             .subscribe(function(){
-                Enemies.push(new Enemy(wrapper));
-                Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
-                I++;
-
+                
                 if(I === NUMBER_ENEMIES)
+                {
                     this.unsubscribe();
+                    return;                
+                }    
 
                 if(player.health_points === 0)
                 {
                     this.unsubscribe();
                     resolve(player); 
+                    return;
                 }
+
+                Enemies.push(new Enemy(wrapper));
+                Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
+                I++;
+
             },
             (err)=>{
                 console.log(err)

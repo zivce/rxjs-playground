@@ -140,18 +140,6 @@ export default class Player {
                     if(this.health_points <= 0)
                     {
                         
-                        // let not_shown_game_over_txt = 
-                        // document.querySelector(".game_over_txt_style") === null;
-
-                        // if(not_shown_game_over_txt)
-                        // {
-                        //     let p = document.createElement("h1");
-                        //     p.innerText=`GAME OVER! Your score is: ${this.score}`;
-                        //     p.className="game_over_txt_style";
-                        //     this.dom_element.parentNode.appendChild(p);
-                        // }
-                        
-
                         removeDomElement(this.dom_element);
 
                     }

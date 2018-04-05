@@ -24,7 +24,7 @@ export default class Enemy {
         //variables block
         let that = this;
         let TOP_OFFSET = 30;
-        let MOVEMENT_SPEED = 5;
+        let MOVEMENT_SPEED = 1;
 
         let windowHeight = window.innerHeight;
         

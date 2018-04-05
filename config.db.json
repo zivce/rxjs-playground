@@ -3,19 +3,19 @@
     {
         
         "NUMBER_ENEMIES": 2,
-        "ENEMIES_SPEED" : 100,
+        "ENEMIES_SPEED" : 10,
         "ENEMY_HP_DESTRUCTION":20
     },
     "medium":
     {
         "NUMBER_ENEMIES": 50,
-        "ENEMIES_SPEED" : 200,
+        "ENEMIES_SPEED" : 8,
         "ENEMY_HP_DESTRUCTION":10
     },
     "hard":
     {
         "NUMBER_ENEMIES": 80,
-        "ENEMIES_SPEED" : 300,
+        "ENEMIES_SPEED" : 5,
         "ENEMY_HP_DESTRUCTION":5
     }
 
