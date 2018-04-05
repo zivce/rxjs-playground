@@ -1,10 +1,10 @@
-export default function(wrapper){
+export default function(wrapper,username){
     
     //clean screen
     while(wrapper.firstChild)
         wrapper.removeChild(wrapper.firstChild);
     
-    
+    console.log(username);
 
 
 }

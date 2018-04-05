@@ -11,10 +11,11 @@ import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
 
 export default class Player {
-    
-    constructor(node){
+   
+
+    constructor(node,userna){
         //simple init
-        
+        this.username =userna;
         this.score = 0;
         this.health_points = 100;
         this.bullets = [];
@@ -23,7 +24,7 @@ export default class Player {
         this.dom_element.className = "player_fill";
         
         let that = this;
-
+        
         node.appendChild(this.dom_element);
         
         //movement events handled
@@ -111,6 +112,7 @@ export default class Player {
 
     }
 
+    
     listenerForCollision(enemies){
         enemies
             .filter((enemy)=>{

@@ -42,6 +42,7 @@ let io_promise = new Promise((resolve,reject)=>{
     let username = "";
 
     let username_empty;
+
     Rx.Observable.interval(10).subscribe(function(){
         username_empty = start_screen_elems.input_player.value === "";
     })
@@ -178,8 +179,8 @@ let game_over = new Promise((resolve,reject)=>{
 
         
         //player has joined the game
-        let player = new Player(wrapper);
-
+        let player = new Player(wrapper,username);
+        
 
         //check if enemies are all gone,killed.
 
@@ -198,22 +199,22 @@ let game_over = new Promise((resolve,reject)=>{
 
             if(Enemies.length === 0)
             {
-                let not_shown_game_over_txt = 
-                    document.querySelector(".game_over_txt_style") === null;
+                // let not_shown_game_over_txt = 
+                //     document.querySelector(".game_over_txt_style") === null;
                 
-                //all enemies killed
-                if(not_shown_game_over_txt)
-                {
-                    let game_over_text = document.createElement("h1");
-                    game_over_text.innerText=`GAME OVER! Your score is: ${player.score}`;
-                    game_over_text.className="game_over_txt_style";
-                    wrapper.appendChild(game_over_text);
+                // //all enemies killed
+                // if(not_shown_game_over_txt)
+                // {
+                //     let game_over_text = document.createElement("h1");
+                //     game_over_text.innerText=`GAME OVER! Your score is: ${player.score}`;
+                //     game_over_text.className="game_over_txt_style";
+                //     wrapper.appendChild(game_over_text);
                     
-                    //start building end screen
-                    resolve(username);
-                }
+                //     //start building end screen
+                // }
 
 
+                resolve(player);
 
                 this.unsubscribe();
             }
@@ -234,7 +235,7 @@ let game_over = new Promise((resolve,reject)=>{
                 if(player.health_points === 0)
                 {
                     this.unsubscribe();
-                    resolve(username); 
+                    resolve(player); 
                 }
             },
             (err)=>{
@@ -251,7 +252,7 @@ let game_over = new Promise((resolve,reject)=>{
             if(player_killed)
             {
                 this.unsubscribe();    
-                resolve(username);            
+                resolve(player);            
             }
         })
 
@@ -309,19 +310,17 @@ let game_over = new Promise((resolve,reject)=>{
         (err)=>{
             console.log(err)
         })
-    },
-    //reject
-    ()=>{
-        alert("Popuni input!");
     })
 })
 
 //building screen after game done 
-game_over.then((username)=>{
-    console.log(username);
+game_over.then((player)=>{
+    
+    console.log(player);
+
     window.setTimeout(
         ()=>{
-            buildEndScreen(wrapper);
+            buildEndScreen(wrapper,player.username);
         },1000
     )
 
