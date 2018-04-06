@@ -36,11 +36,11 @@ export default function(wrapper,player){
     thead.appendChild(tr);
 
     let th3 = document.createElement("th");
-    th3.innerHTML = "Ranking";
+    th3.innerHTML = "Rank";
     tr.appendChild(th3);
 
     let th1 = document.createElement("th");
-    th1.innerHTML = "Username";
+    th1.innerHTML = "User";
     tr.appendChild(th1);
 
 
@@ -53,7 +53,7 @@ export default function(wrapper,player){
     
     let tbody = document.createElement("tbody");
     tbody.className = "scores_body";
-    
+
     table_scores.appendChild(tbody);
 
     wrapper.appendChild(table_scores);

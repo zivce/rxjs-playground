@@ -63,3 +63,45 @@ body{
     width: 30%;
 
 }
+
+.table_scores
+{    
+    font-size: 20px;
+    border-collapse: collapse;
+    margin: 20px auto 0 auto;   
+    border: 0.2px solid rgb(1, 29, 29);
+}
+
+.table_scores th{
+    padding: 20px;
+}
+.table_scores td{
+    padding: 30px;
+}
+.table_scores thead{
+    background-color: #383B53;
+    color: #F4FAFF;
+}
+.scores_body{
+    height:  500px;
+}
+.scores_body>tr
+{
+    color:white;
+    box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, 0.12), inset 1px -1px 3px rgba(0, 0, 0, 0.24);
+    text-align: center;
+}
+
+.scores_body>tr:hover
+{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.scores_body>tr:nth-child(2n)
+{
+    background-color: #8A95A5;
+}
+.scores_body>tr
+{
+    background-color: #B7C0EE;
+}
