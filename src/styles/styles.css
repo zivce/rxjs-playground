@@ -94,14 +94,14 @@ body{
 
 .scores_body>tr:hover
 {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 .scores_body>tr:nth-child(2n)
 {
-    background-color: #8A95A5;
+    background-color: #7b8594;
 }
 .scores_body>tr
 {
-    background-color: #B7C0EE;
+    background-color: #acb4dc;
 }

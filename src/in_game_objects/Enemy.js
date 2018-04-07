@@ -16,6 +16,8 @@ export default class Enemy {
         let windowWidth = window.innerWidth;
         let left_offset = Math.random()*(windowWidth-100) % windowWidth;
         this.dom_element.style.left = `${left_offset}px`;
+        
+
         node.appendChild(this.dom_element);
         
     }
@@ -23,7 +25,7 @@ export default class Enemy {
     startMoving(speed){
         //variables block
         let that = this;
-        let TOP_OFFSET = 30;
+        let TOP_OFFSET = 20;
         let MOVEMENT_SPEED = 1;
 
         let windowHeight = window.innerHeight;

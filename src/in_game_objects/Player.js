@@ -130,7 +130,8 @@ export default class Player {
 
                 let x_hit = ( Math.abs((player_rect.x + player_rect.width/2) - (enemy_rect.x+enemy_rect.width/2))) < 100;
 
-                let y_hit = Math.abs(enemy_rect.y - player_rect.y) < 10;
+
+                let y_hit = Math.abs(enemy_rect.y - player_rect.y) < 20;
 
                 
                 if(x_hit && y_hit)

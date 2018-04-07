@@ -1,5 +1,6 @@
 //in game objects
 import Enemy from './in_game_objects/Enemy';
+import EnemyRomb from './in_game_objects/EnemyRomb';
 import Player from './in_game_objects/Player';
 import removeDomElement from './util/removeElem';
 
@@ -41,7 +42,7 @@ let I = 0 ;
 
 
 
-let io_promise = new Promise((resolve,reject)=>{
+let game_start = new Promise((resolve,reject)=>{
     let username = "";
 
     let username_empty;
@@ -180,7 +181,7 @@ let io_promise = new Promise((resolve,reject)=>{
 let game_over = new Promise((resolve,reject)=>{
 
     //When difficulty selected proceed to starting game
-    io_promise
+    game_start
     .then((username)=>{
 
         
@@ -222,7 +223,7 @@ let game_over = new Promise((resolve,reject)=>{
 
 
         //generating enemies
-        Rx.Observable.interval(1000)
+        Rx.Observable.interval(1000)  
             .subscribe(function(){
                 
                 if(I === NUMBER_ENEMIES)
@@ -238,7 +239,12 @@ let game_over = new Promise((resolve,reject)=>{
                     return;
                 }
 
-                Enemies.push(new Enemy(wrapper));
+                if(I % 2 === 0)
+                    Enemies.push(new Enemy(wrapper));
+                else
+                    Enemies.push(new EnemyRomb(wrapper));
+
+                
                 Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
                 I++;
 
@@ -281,23 +287,14 @@ let game_over = new Promise((resolve,reject)=>{
                     }
                     
                 
-
+                    //this block is for bullet hit enemy logic
                     let enemy_rect = enemy.dom_element.getBoundingClientRect();
-                    
-                
-
                     let bullet_rect = bullet.getBoundingClientRect();
-
-                    let x_match = ( Math.abs(bullet_rect.x - (enemy_rect.x+enemy_rect.width/2))) < 50;
-
-
-                    let y_match = Math.abs(enemy_rect.y -
-                    bullet_rect.y) < 5 ;
-                    
+                    let x_match = Math.abs(bullet_rect.x - (enemy_rect.x + enemy_rect.width/2)) - 10 <= enemy_rect.width/2;
+                    let y_match = Math.abs(enemy_rect.y - bullet_rect.y) <= (enemy_rect.height / 2);
                     let bullet_hit_enemy = y_match && x_match ;
-                    
+                    //end block
 
-                    // NANESI STETU
                     if(bullet_hit_enemy)
                     {
 
@@ -325,7 +322,6 @@ game_over.then((player)=>{
         ()=>{},1000
     )
 
-    console.log();
     document.body.style.overflowY = "auto";
 
     let end_screen_elems = {};

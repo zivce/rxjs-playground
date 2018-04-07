@@ -1,8 +1,30 @@
 .enemy_fill{
-    width: 0;
+    width: 0;       
     height: 0;
     position: absolute;
     border-style: solid;
     border-width: 71.0px 41px 0 41px;
     border-color: #c02244 transparent transparent transparent;
+}
+
+/*OBAVEZNO POSITION ABSOLUTE */ 
+
+
+.enemy_romb_fill {
+	width: 0;
+	height: 0;
+	border: 50px solid transparent;
+	border-bottom-color: red;
+	position: absolute;
+	top: -50px;
+}
+.enemy_romb_fill:after {
+	content: '';
+	position: absolute;
+	left: -50px;
+	top: 50px;
+	width: 0;
+	height: 0;
+	border: 50px solid transparent;
+	border-top-color: red;
 }
