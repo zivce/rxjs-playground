@@ -6,7 +6,7 @@
     left:50vw;
     border-style: solid;
     border-width: 0 62px 79px 62px;
-    border-color:  transparent transparent #3d02d3b7 transparent;
+    border-color:  transparent transparent #922D50 transparent;
 }
 .player_shooted{
     width: 0;
@@ -16,10 +16,27 @@
     left:50vw;
     border-style: solid;
     border-width: 0 62px 79px 62px;
-    border-color:  transparent transparent #3d02d3b7 transparent;
+    border-color:  transparent transparent #922D50 transparent;
 }
 
 .game_over_txt_style{
     text-align: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.player_score{
+    position: absolute;
+    left:0;
+    top:0;
+    font-weight: 800;
+    color:rgba(255, 0, 0, 0.664);
+
+}
+
+.hp_score{
+    position: absolute;
+    left:0;
+    top:20;
+    font-weight: 800;
+    
+    color:rgba(255, 0, 0, 0.664);
 }
