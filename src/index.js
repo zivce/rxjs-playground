@@ -1,6 +1,6 @@
 //in game objects
 import Enemy from './in_game_objects/Enemy';
-import EnemyRomb from './in_game_objects/EnemyRomb';
+import {EnemyRomb,EnemyCone, EnemyDiamond} from './in_game_objects/DerivedEnemies'
 import Player from './in_game_objects/Player';
 import removeDomElement from './util/removeElem';
 
@@ -239,12 +239,16 @@ let game_over = new Promise((resolve,reject)=>{
                     return;
                 }
 
-                if(I % 2 === 0)
-                    Enemies.push(new Enemy(wrapper));
-                else
-                    Enemies.push(new EnemyRomb(wrapper));
 
-                
+                if(I % 4 === 0)
+                    Enemies.push(new Enemy(wrapper));
+                else if( I % 4 === 1)
+                    Enemies.push(new EnemyRomb(wrapper));
+                else if (I% 4 === 2)
+                    Enemies.push(new EnemyCone(wrapper));
+                else
+                    Enemies.push(new EnemyDiamond(wrapper));
+
                 Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
                 I++;
 

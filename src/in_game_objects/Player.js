@@ -129,10 +129,7 @@ export default class Player {
                 let player_rect = this.dom_element.getBoundingClientRect();
 
                 let x_hit = ( Math.abs((player_rect.x + player_rect.width/2) - (enemy_rect.x+enemy_rect.width/2))) < 100;
-
-
                 let y_hit = Math.abs(enemy_rect.y - player_rect.y) < 20;
-
                 
                 if(x_hit && y_hit)
                 {
@@ -174,22 +171,16 @@ export default class Player {
                 
                 bottom_offset += MOVEMENT_SPEED;
                 bullet.style.bottom = `${bottom_offset}px`;
-
                 let over_top_edge = bottom_offset >= window.innerHeight;
-                
-
 
                 if(over_top_edge)
                 {
                     this.unsubscribe();
-
-
                     removeDomElement(bullet);
 
                     //Removing not visible bullet
                     let remove_this_bullet_index = that.bullets.indexOf(bullet);
                     that.bullets.splice(remove_this_bullet_index,1);
-
                     return;   
                 }
                 
