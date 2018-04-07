@@ -1,4 +1,5 @@
 import  '../styles/enemy.css';
+import removeDomElement from '../util/removeElem';
 
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
@@ -15,6 +16,8 @@ export default class Enemy {
         let windowWidth = window.innerWidth;
         let left_offset = Math.random()*(windowWidth-100) % windowWidth;
         this.dom_element.style.left = `${left_offset}px`;
+        
+
         node.appendChild(this.dom_element);
         
     }
@@ -22,8 +25,8 @@ export default class Enemy {
     startMoving(speed){
         //variables block
         let that = this;
-        let TOP_OFFSET = 30;
-        let MOVEMENT_SPEED = 5;
+        let TOP_OFFSET = 20;
+        let MOVEMENT_SPEED = 1;
 
         let windowHeight = window.innerHeight;
         
@@ -50,7 +53,7 @@ export default class Enemy {
             {
                 this.unsubscribe();
                 //console.log(that);
-                that.container.removeChild(that.dom_element);
+                removeDomElement(that.dom_element);
                 return;
             }
         });
