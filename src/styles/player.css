@@ -8,6 +8,17 @@
     border-width: 0 62px 79px 62px;
     border-color:  transparent transparent #922D50 transparent;
 }
+
+.player_fill_logo{
+    width: 0;
+    height: 0;
+    bottom:20px;
+    left:50vw;
+    border-style: solid;
+    border-width: 0 62px 79px 62px;
+    border-color:  transparent transparent #922D50 transparent;
+}
+
 .player_shooted{
     width: 0;
     height: 0;

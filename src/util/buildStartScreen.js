@@ -4,6 +4,49 @@ export default function(wrapper){
     wrapper.className="container start_screen";
     document.body.appendChild(wrapper);
 
+    //logo
+    let figures = document.createElement("div");
+    figures.className = "figures_wrapper";
+
+    let logo1 = document.createElement("div");
+    logo1.className = "player_fill";
+    logo1.style.position = "relative";
+    logo1.style.bottom = "0";
+    logo1.style.left = "0";
+
+    figures.appendChild(logo1);
+
+
+    let p1 = document.createElement("p");
+    p1.style.position = "relative";
+    p1.style.fontSize = "1.4em";
+    p1.innerText ="vs.";
+
+    figures.appendChild(p1);
+
+
+    let logo2 = document.createElement("div");
+    logo2.className = "enemy_cone_fill";
+    logo2.style.position = "relative";
+
+    figures.appendChild(logo2);
+
+    let logo3 = document.createElement("div");
+    logo3.className = "enemy_diamond_fill";
+    logo3.style.marginTop =  "0";
+    logo3.style.position = "relative";
+
+    figures.appendChild(logo3);
+
+    let logo4 = document.createElement("div");
+    logo4.className = "enemy_fill";
+    logo4.style.position = "relative";
+
+    figures.appendChild(logo4);
+
+
+    wrapper.appendChild(figures);
+
 
     //select difficulty
 

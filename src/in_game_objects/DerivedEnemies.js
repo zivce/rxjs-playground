@@ -2,20 +2,6 @@
 //Base class
 import Enemy from './Enemy';
 
-export class EnemyRomb extends Enemy{
-    constructor(node)
-    {
-        super(node);
-        this.health_points = 200;
-        this.dom_element.className = "enemy enemy_romb_fill";
-    }
-    
-    startMoving(speed)
-    {
-        super.startMoving(speed/2);
-    }
-}
-
 export class EnemyCone extends Enemy{
     constructor(node)
     {
