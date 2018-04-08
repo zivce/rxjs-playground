@@ -1,2 +1,4 @@
 node_modules/
 /package-lock.json
+/db-1523187021892.json
+/scores.db.json
