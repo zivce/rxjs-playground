@@ -1,6 +1,6 @@
-export default function(username)
+export default function(username,diff)
 {
-    return fetch('http://localhost:3001/scores')
+    return fetch(`http://localhost:3001/${diff}`)
         .then((data)=>{
             return data.json();
         })

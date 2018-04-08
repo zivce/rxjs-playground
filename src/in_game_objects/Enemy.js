@@ -10,7 +10,7 @@ export default class Enemy {
         this.health_points = 100;
         this.container = node;
         this.dom_element = document.createElement("div");
-        this.dom_element.className = "enemy_fill";
+        this.dom_element.className = "enemy enemy_fill";
         
         
         let windowWidth = window.innerWidth;
@@ -49,6 +49,7 @@ export default class Enemy {
             let off_bottom_edge = TOP_OFFSET >= windowHeight - 50;
             
             //ako ima 0 onda je obrisan
+
             if(off_bottom_edge && that.health_points > 0)
             {
                 this.unsubscribe();

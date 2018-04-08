@@ -1,5 +1,5 @@
 
-export default function(wrapper){
+export default function(wrapper,player){
     let table = document.getElementsByTagName('table');
     table = table[0];
 
@@ -8,7 +8,7 @@ export default function(wrapper){
             table.removeChild(table.firstChild);
 
     
-    fetch("http://localhost:3001/scores")
+    fetch(`http://localhost:3001/${player.difficulty}`)
         .then((resp) => {return resp.json()})
         .then((scores_arr)=>{
            

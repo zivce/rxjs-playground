@@ -12,9 +12,8 @@ import buildScoresTable from './util/buildScoresTable';
 
 
 //Rx modules
-import Rx from 'rxjs';
+import Rx, { Subject } from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
-
 //styles
 import styles from './styles/styles.css';
 
@@ -65,7 +64,7 @@ let game_start = new Promise((resolve,reject)=>{
             {                    
                 username = start_screen_elems.input_player.value;
 
-                checkUsername(username).then((user_in_use)=>{
+                checkUsername(username,"easy").then((user_in_use)=>{
                     if(user_in_use)
                     {
                         start_screen_elems.input_player.value = "";
@@ -80,8 +79,11 @@ let game_start = new Promise((resolve,reject)=>{
                                 ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
                                 ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                             })
-                            
-                            resolve(username);
+                            let resolveObj ={
+                                username : username,
+                                diff : "easy"
+                            }
+                            resolve(resolveObj);
     
                         })
                     }
@@ -105,7 +107,7 @@ let game_start = new Promise((resolve,reject)=>{
 
                 username = start_screen_elems.input_player.value;
                 
-                checkUsername(username).then((user_in_use)=>{
+                checkUsername(username,"medium").then((user_in_use)=>{
                     if(user_in_use)
                     {
                         start_screen_elems.input_player.value = "";
@@ -120,8 +122,11 @@ let game_start = new Promise((resolve,reject)=>{
                                 ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
                                 ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                             })
-                            
-                            resolve(username);
+                            let resolveObj ={
+                                username : username,
+                                diff : "medium"
+                            }
+                            resolve(resolveObj);
     
                         })
                     }
@@ -148,7 +153,7 @@ let game_start = new Promise((resolve,reject)=>{
             {
                 username = start_screen_elems.input_player.value;
                 
-                checkUsername(username).then((user_in_use)=>{
+                checkUsername(username,"hard").then((user_in_use)=>{
                     if(user_in_use)
                     {
                         start_screen_elems.input_player.value = "";
@@ -163,7 +168,11 @@ let game_start = new Promise((resolve,reject)=>{
                                 ENEMIES_SPEED  = objJson.ENEMIES_SPEED;
                                 ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                             })
-                            resolve(username);
+                            let resolveObj ={
+                                username : username,
+                                diff : "hard"
+                            }
+                            resolve(resolveObj);
                         })
                     }
                 })
@@ -182,7 +191,7 @@ let game_over = new Promise((resolve,reject)=>{
 
     //When difficulty selected proceed to starting game
     game_start
-    .then((username)=>{
+    .then((user_and_diff)=>{
 
         document.body.style.background = "url('./src/img/tic-tac-toe.png') repeat";
         //remove start screen 
@@ -196,31 +205,8 @@ let game_over = new Promise((resolve,reject)=>{
 
         
         //player has joined the game
-        let player = new Player(wrapper,username);
+        let player = new Player(wrapper,user_and_diff.username,user_and_diff.diff);
         
-
-        //check if enemies are all gone,killed.
-
-        Rx.Observable
-        .interval(1010)
-        .subscribe(function(){
-            
-            //gets in game enemies
-            Enemies = Enemies
-                .filter((enemy)=>{
-                    let enemy_rect = enemy.dom_element.getBoundingClientRect();
-                    let enemy_in_game =  enemy_rect.x !== 0 ;
-                    return enemy_in_game;
-                })
-
-            if(Enemies.length === 0)
-            {
-                resolve(player);
-                this.unsubscribe();
-            }
-        })
-        
-
 
         //generating enemies
         Rx.Observable.interval(1000)  
@@ -251,7 +237,6 @@ let game_over = new Promise((resolve,reject)=>{
 
                 Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
                 I++;
-
             },
             (err)=>{
                 console.log(err)
@@ -271,6 +256,19 @@ let game_over = new Promise((resolve,reject)=>{
             }
         })
 
+        Rx.Observable
+        .interval(1010)
+        .subscribe(function(){
+            let enemies =  wrapper.querySelector(".enemy");
+
+            if(enemies === null)
+            {
+                Enemies = [];
+                this.unsubscribe();
+                resolve(player);
+            }
+                
+        })
 
         //shots hit the target  
         Rx.Observable.interval(1).subscribe(function(){
@@ -278,6 +276,13 @@ let game_over = new Promise((resolve,reject)=>{
         
 
             player.bullets.forEach(function(bullet){
+                Enemies = Enemies
+                .filter((enemy)=>{
+                    let enemy_rect = enemy.dom_element.getBoundingClientRect();
+                    let enemy_in_game =  enemy_rect.x !== 0 ;
+                    return enemy_in_game;
+                })
+
                 Enemies.forEach(function(enemy){
 
                     //if killed remove from array and continue
@@ -305,7 +310,6 @@ let game_over = new Promise((resolve,reject)=>{
                         removeDomElement(bullet);
 
                         player.score += ENEMY_HP_DESTRUCTION;
-                        
                         enemy.health_points-= ENEMY_HP_DESTRUCTION;
                         
                     }
@@ -337,7 +341,7 @@ game_over.then((player)=>{
     }
 
 
-    buildScoresTable(wrapper);
+    buildScoresTable(wrapper,player);
 
     const save_button = end_screen_elems.save;
     
@@ -352,7 +356,7 @@ game_over.then((player)=>{
 
         }
 
-        fetch('http://localhost:3001/scores',{
+        fetch(`http://localhost:3001/${player.difficulty}`,{
             method:'POST',
             body: JSON.stringify(score_for_save),
             headers: new Headers({
@@ -365,7 +369,7 @@ game_over.then((player)=>{
             {
                 alert('Score saved!');
                 removeDomElement(end_screen_elems.save);
-                buildScoresTable(wrapper);
+                buildScoresTable(wrapper,player);
             });
     }
 

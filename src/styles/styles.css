@@ -150,3 +150,6 @@ body{
 .game_over_parag span:nth-child(2){
     font-weight: bold;
 }
+.enemy {
+    /*dummy class */
+}

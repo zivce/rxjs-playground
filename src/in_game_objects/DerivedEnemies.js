@@ -7,7 +7,7 @@ export class EnemyRomb extends Enemy{
     {
         super(node);
         this.health_points = 200;
-        this.dom_element.className = "enemy_romb_fill";
+        this.dom_element.className = "enemy enemy_romb_fill";
     }
     
     startMoving(speed)
@@ -20,8 +20,8 @@ export class EnemyCone extends Enemy{
     constructor(node)
     {
         super(node);
-        this.health_points = 150;
-        this.dom_element.className = "enemy_cone_fill";
+        this.health_points = 100;
+        this.dom_element.className = "enemy enemy_cone_fill";
     }
 
     startMoving(speed)
@@ -34,8 +34,8 @@ export class EnemyDiamond extends Enemy{
     constructor(node)
     {
         super(node);
-        this.health_points = 250;
-        this.dom_element.className = "enemy_diamond_fill";
+        this.health_points = 300;
+        this.dom_element.className = "enemy enemy_diamond_fill";
     }
     startMoving(speed)
     {

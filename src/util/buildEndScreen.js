@@ -13,8 +13,8 @@ export default function(wrapper,player){
 
     let prg = document.createElement("p");
     prg.className = "game_over_parag";
-    
-    prg.innerHTML = `Score of <span>${player.username}</span> is: <span>${player.score}</span> points`;
+
+    prg.innerHTML = `Score of <span>${player.username}</span> is <span>${player.score}</span> points on <span>${player.difficulty}</span> difficulty`;
     wrapper.appendChild(prg);
 
 

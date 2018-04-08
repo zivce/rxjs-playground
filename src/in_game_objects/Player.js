@@ -13,8 +13,10 @@ import {interval} from 'rxjs/observable/interval';
 export default class Player {
    
 
-    constructor(node,userna){
+    constructor(node,userna,cfg){
         //simple init
+        this.difficulty = cfg;
+
         this.username =userna;
         this.score = 0;
         this.health_points = 100;
