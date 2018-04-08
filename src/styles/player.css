@@ -25,18 +25,20 @@
 
 .player_score{
     position: absolute;
-    left:0;
+    left:60;
     top:0;
-    font-weight: 800;
+    font-weight: bolder;
+    font-size: 1.4em;
     color:rgba(255, 0, 0, 0.664);
 
 }
 
 .hp_score{
     position: absolute;
-    left:0;
-    top:20;
-    font-weight: 800;
+    left:60;
+    top:40;
+    font-weight: bolder;
+    font-size: 1.3em;
     
     color:rgba(255, 0, 0, 0.664);
 }

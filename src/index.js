@@ -184,7 +184,7 @@ let game_over = new Promise((resolve,reject)=>{
     game_start
     .then((username)=>{
 
-        
+        document.body.style.background = "url('./src/img/tic-tac-toe.png') repeat";
         //remove start screen 
         
         for(let prop in start_screen_elems)
@@ -321,7 +321,7 @@ let game_over = new Promise((resolve,reject)=>{
 
 //building screen after game done 
 game_over.then((player)=>{
-
+    document.body.style.background = "";
     window.setTimeout(
         ()=>{},1000
     )

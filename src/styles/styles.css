@@ -1,5 +1,6 @@
 body{
-    background-color: aliceblue;
+    background-color: #3C91C2;
+    color:white;
     overflow-y:hidden;
     overflow-x: hidden;
     font-size: 16px;
@@ -18,6 +19,7 @@ body{
 }
 
 .player_container{
+    font-size: 1.1em;
     display: flex;
     flex-direction: row;
     margin:auto;
@@ -30,7 +32,7 @@ body{
 .player_container>input{
     height: 30px;
     margin: auto;
-    
+    font-size:1em;
     font-weight: bold;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
@@ -63,7 +65,7 @@ body{
     cursor: hand;
     color:#F4FAFF;    
     border: none;
-    background: linear-gradient(#606975,#3f444a);
+    background: linear-gradient(0deg,#606975,#383D3B 70%);
     font-size: 1.3rem;
     font-weight: lighter;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
@@ -72,7 +74,7 @@ body{
 }
 
 .btn_config:hover{
-    background: linear-gradient(#3f444a,#606975);
+    background: linear-gradient(0deg,#383B53,#606975 70%);
 }
 
 .table_scores
@@ -141,12 +143,10 @@ body{
     text-align: center;
 }
 .game_over_parag span:nth-child(1){
-    color: #333232;;
     font-weight: 700;
 
 }
 
 .game_over_parag span:nth-child(2){
-    color:#5E0B15;
     font-weight: bold;
 }
