@@ -2,7 +2,6 @@ body{
     background-color: aliceblue;
     overflow-y:hidden;
     overflow-x: hidden;
-    
     font-size: 16px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
     
@@ -59,11 +58,21 @@ body{
 
 .btn_config
 {
+    margin-left: 2px;
+    cursor: pointer;
+    cursor: hand;
+    color:#F4FAFF;    
+    border: none;
+    background: linear-gradient(#606975,#3f444a);
     font-size: 1.3rem;
     font-weight: lighter;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
     width: 30%;
 
+}
+
+.btn_config:hover{
+    background: linear-gradient(#3f444a,#606975);
 }
 
 .table_scores
@@ -122,4 +131,22 @@ body{
 .scores_body>tr
 {
     background-color: #606975;
+}
+
+.game_over_parag
+{
+    font-size: 1.5em;
+    font-weight: 400;
+
+    text-align: center;
+}
+.game_over_parag span:nth-child(1){
+    color: #333232;;
+    font-weight: 700;
+
+}
+
+.game_over_parag span:nth-child(2){
+    color:#5E0B15;
+    font-weight: bold;
 }
