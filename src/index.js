@@ -336,16 +336,15 @@ game_over.then((player)=>{
         window.location.reload(true);
     }
 
-    const scores = end_screen_elems.table_scores;
 
-    buildScoresTable(scores);
+    buildScoresTable(wrapper);
 
     const save_button = end_screen_elems.save;
     
     save_button.onclick = ()=>{
         let user =  player.username;
         let score = player.score;
-
+        
         let score_for_save = 
         {
             score : score,
@@ -366,7 +365,7 @@ game_over.then((player)=>{
             {
                 alert('Score saved!');
                 removeDomElement(end_screen_elems.save);
-                buildScoresTable(scores);
+                buildScoresTable(wrapper);
             });
     }
 

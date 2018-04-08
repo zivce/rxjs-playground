@@ -2,7 +2,7 @@
     "easy":
     {
         
-        "NUMBER_ENEMIES": 2,
+        "NUMBER_ENEMIES": 30,
         "ENEMIES_SPEED" : 10,
         "ENEMY_HP_DESTRUCTION":20
     },

@@ -98,6 +98,22 @@ body{
 {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.5);
 }
+/* gold */
+.scores_body>tr:nth-child(1)
+{
+    background: linear-gradient(#DAA520,#EDC54E);
+}
+/* silver */
+.scores_body>tr:nth-child(2)
+{
+    background: linear-gradient(#A9A9A9,#adabab);
+}
+
+/* bronze */
+.scores_body>tr:nth-child(3)
+{
+    background: linear-gradient(#cd7f32,#d88739);
+}
 
 .scores_body>tr:nth-child(2n)
 {
@@ -105,5 +121,5 @@ body{
 }
 .scores_body>tr
 {
-    background-color: #acb4dc;
+    background-color: #606975;
 }

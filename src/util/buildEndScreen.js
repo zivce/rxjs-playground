@@ -27,39 +27,39 @@ export default function(wrapper,player){
     wrapper.appendChild(buttons_group_end);
     
 
-    let table_scores = document.createElement("table");
-    table_scores.className = "table_scores";
+    // let table_scores = document.createElement("table");
+    // table_scores.className = "table_scores";
 
-    let thead = document.createElement("thead");
+    // let thead = document.createElement("thead");
 
-    let tr = document.createElement("tr");
-    thead.appendChild(tr);
+    // let tr = document.createElement("tr");
+    // thead.appendChild(tr);
 
-    let th3 = document.createElement("th");
-    th3.innerHTML = "Rank";
-    tr.appendChild(th3);
+    // let th3 = document.createElement("th");
+    // th3.innerHTML = "Rank";
+    // tr.appendChild(th3);
 
-    let th1 = document.createElement("th");
-    th1.innerHTML = "User";
-    tr.appendChild(th1);
-
-
-    let th2 = document.createElement("th");
-    th2.innerHTML = "Scores";
-    tr.appendChild(th2);
+    // let th1 = document.createElement("th");
+    // th1.innerHTML = "User";
+    // tr.appendChild(th1);
 
 
-    table_scores.appendChild(thead);
+    // let th2 = document.createElement("th");
+    // th2.innerHTML = "Scores";
+    // tr.appendChild(th2);
+
+
+    // table_scores.appendChild(thead);
     
-    let tbody = document.createElement("tbody");
-    tbody.className = "scores_body";
+    // let tbody = document.createElement("tbody");
+    // tbody.className = "scores_body";
 
-    table_scores.appendChild(tbody);
+    // table_scores.appendChild(tbody);
 
-    wrapper.appendChild(table_scores);
+    // wrapper.appendChild(table_scores);
 
     return {
-        table_scores:table_scores,
+        // table_scores:table_scores,
         save:btn_save,
         new:btn_new,
     }

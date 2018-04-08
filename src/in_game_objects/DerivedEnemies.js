@@ -12,7 +12,7 @@ export class EnemyRomb extends Enemy{
     
     startMoving(speed)
     {
-        super.startMoving(speed/1.5);
+        super.startMoving(speed/2);
     }
 }
 
@@ -39,7 +39,6 @@ export class EnemyDiamond extends Enemy{
     }
     startMoving(speed)
     {
-        //diamond moves faster 
         super.startMoving(speed/2);
     }
 }
