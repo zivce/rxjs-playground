@@ -1,8 +1,65 @@
 .enemy_fill{
-    width: 0;
+    width: 0;       
     height: 0;
     position: absolute;
     border-style: solid;
-    border-width: 71.0px 41px 0 41px;
-    border-color: #c02244 transparent transparent transparent;
+    
+    border-width: 79px 62px 0 62px;
+
+    border-color: #6E75A8 transparent transparent transparent;
+}
+
+.enemy_romb_fill {
+	width: 0;
+	height: 0;
+	border: 50px solid transparent;
+	border-bottom-color:#8BAAAD;
+	position: absolute;
+	top: -50px;
+}
+.enemy_romb_fill:after {
+	content: '';
+	position: absolute;
+	left: -50px;
+	top: 50px;
+	width: 0;
+	height: 0;
+	border: 50px solid transparent;
+	border-top-color: #8BAAAD;
+}
+
+.enemy_cone_fill{
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-top: 100px solid #1C3738;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.enemy_diamond_fill {
+ 
+        border-style: solid;
+        border-color: transparent transparent #404E7C transparent;
+        border-width: 0 25px 25px 25px;
+        height: 0;
+        width: 50px;
+        position: absolute;
+        margin: 20px 0 50px 0;
+    
+}
+
+.enemy_diamond_fill:after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: -25px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: #404E7C transparent transparent transparent;
+    border-width: 70px 50px 0 50px;
 }

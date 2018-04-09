@@ -2,14 +2,22 @@
 import '../styles/player.css';
 import '../styles/bullet.css'
 
+//utils 
+import removeDomElement from '../util/removeElem';
+
+
+//rx components
 import Rx from 'rxjs';
 import {interval} from 'rxjs/observable/interval';
-import fromPixelsToInt from '../utils/fromPixelsToInt';
 
 export default class Player {
-    
-    constructor(node){
+   
+
+    constructor(node,userna,cfg){
         //simple init
+        this.difficulty = cfg;
+
+        this.username =userna;
         this.score = 0;
         this.health_points = 100;
         this.bullets = [];
@@ -17,8 +25,8 @@ export default class Player {
         this.dom_element = document.createElement("div");
         this.dom_element.className = "player_fill";
         
-
-
+        let that = this;
+        
         node.appendChild(this.dom_element);
         
         //movement events handled
@@ -40,12 +48,20 @@ export default class Player {
         //space pressed handled
         const spacebar_pressed = Rx.Observable.fromEvent(document,'keypress');
 
-        spacebar_pressed.subscribe((keypressed_event)=>{
+        spacebar_pressed.subscribe(function(keypressed_event){
             if(keypressed_event.code === 'Space')
             {
-                this.firePower();
+                that.firePower();
             }
+            
+            let shown_game_over_txt = 
+            document.querySelector(".game_over_txt_style") !== null;
+
+            if(shown_game_over_txt)
+                this.unsubscribe();
+
         })
+
 
         //vars used in subscription below
         let thisPlayer = this;
@@ -67,10 +83,71 @@ export default class Player {
             },RETURN_TO_NORMAL_PLAYER);
             
         })
+        
+        let score_container = document.createElement("p");
+        score_container.className = "player_score";
+        node.appendChild(score_container);
 
+        let hp_container = document.createElement("p");
+        hp_container.className = "hp_score";
+        node.appendChild(hp_container);
+
+        //Update score 
+        Rx.Observable.interval(10).subscribe(function(){
+            score_container.innerHTML = `Score: ${that.score}`;
+            hp_container.innerHTML = `HP: ${that.health_points}`;
+            
+            let shown_game_over_txt = 
+            document.querySelector(".game_over_txt_style") !== null;
+
+            
+            if(shown_game_over_txt)
+            {   
+
+                removeDomElement(score_container);
+                removeDomElement(hp_container);
+
+                this.unsubscribe();
+            }
+
+        })
 
     }
+
     
+    listenerForCollision(enemies){
+        enemies
+            .filter((enemy)=>{
+                let en = enemy.dom_element.getBoundingClientRect();
+                let enemy_in_game = en.x !== 0 && en.y !== 0;
+                return enemy_in_game;
+
+            })
+
+           
+            
+        enemies.forEach((enemy)=>{
+                let enemy_rect = enemy.dom_element.getBoundingClientRect();
+                let player_rect = this.dom_element.getBoundingClientRect();
+
+                let x_hit = ( Math.abs((player_rect.x + player_rect.width/2) - (enemy_rect.x+enemy_rect.width/2))) < 100;
+                let y_hit = Math.abs(enemy_rect.y - player_rect.y) < 20;
+                
+                if(x_hit && y_hit)
+                {
+                    this.health_points -= 10;
+                    // KIA
+                    if(this.health_points <= 0)
+                    {
+                        
+                        removeDomElement(this.dom_element);
+
+                    }
+                        
+                }
+            })
+            return this.health_points;
+    }
     firePower(){
         
         let SPEED = 5;
@@ -83,8 +160,9 @@ export default class Player {
         
         this.container.appendChild(bullet);
         this.bullets.push(bullet);
-        
-        let bottom_offset = fromPixelsToInt(bullet.style.bottom);
+        let bottom_bullet = bullet.getBoundingClientRect();
+
+        let bottom_offset = 100;
 
         let that = this;
         
@@ -95,23 +173,16 @@ export default class Player {
                 
                 bottom_offset += MOVEMENT_SPEED;
                 bullet.style.bottom = `${bottom_offset}px`;
-
                 let over_top_edge = bottom_offset >= window.innerHeight;
-                
-
 
                 if(over_top_edge)
                 {
                     this.unsubscribe();
-                    const parent = bullet.parentNode;
+                    removeDomElement(bullet);
 
-                    if(parent !== null)
-                        parent.removeChild(bullet);
-                    
                     //Removing not visible bullet
                     let remove_this_bullet_index = that.bullets.indexOf(bullet);
                     that.bullets.splice(remove_this_bullet_index,1);
-
                     return;   
                 }
                 
