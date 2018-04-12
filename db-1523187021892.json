@@ -1,0 +1,17 @@
+{
+  "easy": {
+    "NUMBER_ENEMIES": 30,
+    "ENEMIES_SPEED": 10,
+    "ENEMY_HP_DESTRUCTION": 20
+  },
+  "medium": {
+    "NUMBER_ENEMIES": 50,
+    "ENEMIES_SPEED": 8,
+    "ENEMY_HP_DESTRUCTION": 10
+  },
+  "hard": {
+    "NUMBER_ENEMIES": 80,
+    "ENEMIES_SPEED": 5,
+    "ENEMY_HP_DESTRUCTION": 5
+  }
+}
