@@ -52,7 +52,6 @@ let game_start = new Promise((resolve,reject)=>{
     })
 
 
-    setTimeout(()=>{
         //do ajax here 
         start_screen_elems.easy.onclick = (event)=>{
             
@@ -188,7 +187,6 @@ let game_start = new Promise((resolve,reject)=>{
 
         }
 
-        },1000)
         
 
 
