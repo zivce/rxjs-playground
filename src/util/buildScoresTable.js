@@ -7,8 +7,9 @@ export default function(wrapper,player){
         while(table.firstChild)
             table.removeChild(table.firstChild);
 
+    let url_diff = `http://localhost:3001/${player.difficulty}`;
     
-    fetch(`http://localhost:3001/${player.difficulty}`)
+    fetch(url_diff)
         .then((resp) => {return resp.json()})
         .then((scores_arr)=>{
            

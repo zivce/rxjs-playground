@@ -16,7 +16,6 @@ export default class Player {
     constructor(node,userna,cfg){
         //simple init
         this.difficulty = cfg;
-
         this.username =userna;
         this.score = 0;
         this.health_points = 100;
@@ -24,14 +23,17 @@ export default class Player {
         this.container = node;
         this.dom_element = document.createElement("div");
         this.dom_element.className = "player_fill";
-        
         let that = this;
-        
+        const FREQ_HP_SCORES_UPDATES = 10; 
+
+
         node.appendChild(this.dom_element);
+        
         
         //movement events handled
         const mouse_move_events = Rx.Observable.fromEvent(document,'mousemove');
-        mouse_move_events.subscribe((event)=>{
+
+        let mouse_moved = (event)=>{
     
             let cursor_not_close_to_right_edge
                 = event.clientX < window.innerWidth - 250;
@@ -42,13 +44,14 @@ export default class Player {
 
                 this.dom_element.style.left = window.innerWidth - 200;
         
-        })
+        }
+        
+        mouse_move_events.subscribe(mouse_moved);
 
 
         //space pressed handled
         const spacebar_pressed = Rx.Observable.fromEvent(document,'keypress');
-
-        spacebar_pressed.subscribe(function(keypressed_event){
+        let spacebar_pressed_handler = function(keypressed_event){
             if(keypressed_event.code === 'Space')
             {
                 that.firePower();
@@ -60,15 +63,15 @@ export default class Player {
             if(shown_game_over_txt)
                 this.unsubscribe();
 
-        })
+        }
+        spacebar_pressed.subscribe(spacebar_pressed_handler);
 
 
         //vars used in subscription below
         let thisPlayer = this;
         let RETURN_TO_NORMAL_PLAYER = 300;
 
-
-        spacebar_pressed.subscribe(function(keypressed_event){
+        let recoil_player_movement_handler = function(keypressed_event){
             let that = this;//unsubscribe function
             if(keypressed_event.code === 'Space')
             {
@@ -82,8 +85,12 @@ export default class Player {
 
             },RETURN_TO_NORMAL_PLAYER);
             
-        })
+        }
+
+        spacebar_pressed.subscribe(recoil_player_movement_handler)
         
+        //scores and hp info 
+
         let score_container = document.createElement("p");
         score_container.className = "player_score";
         node.appendChild(score_container);
@@ -93,7 +100,7 @@ export default class Player {
         node.appendChild(hp_container);
 
         //Update score 
-        Rx.Observable.interval(10).subscribe(function(){
+        let hp_scores_updater = function(){
             score_container.innerHTML = `Score: ${that.score}`;
             hp_container.innerHTML = `HP: ${that.health_points}`;
             
@@ -103,14 +110,15 @@ export default class Player {
             
             if(shown_game_over_txt)
             {   
-
                 removeDomElement(score_container);
                 removeDomElement(hp_container);
-
                 this.unsubscribe();
             }
 
-        })
+        }
+
+
+        Rx.Observable.interval(FREQ_HP_SCORES_UPDATES).subscribe(hp_scores_updater)
 
     }
 
@@ -166,27 +174,30 @@ export default class Player {
 
         let that = this;
         
-        Rx.Observable.interval(SPEED)
-            .subscribe(function(){
+        let player_shooted = function(){
 
-                //player shooted
-                
-                bottom_offset += MOVEMENT_SPEED;
-                bullet.style.bottom = `${bottom_offset}px`;
-                let over_top_edge = bottom_offset >= window.innerHeight;
+            //player shooted
+            
+            bottom_offset += MOVEMENT_SPEED;
+            bullet.style.bottom = `${bottom_offset}px`;
+            let over_top_edge = bottom_offset >= window.innerHeight;
 
-                if(over_top_edge)
-                {
-                    this.unsubscribe();
-                    removeDomElement(bullet);
+            if(over_top_edge)
+            {
+                this.unsubscribe();
+                removeDomElement(bullet);
 
-                    //Removing not visible bullet
-                    let remove_this_bullet_index = that.bullets.indexOf(bullet);
-                    that.bullets.splice(remove_this_bullet_index,1);
-                    return;   
-                }
-                
-            })
+                //Removing not visible bullet
+                let remove_this_bullet_index = that.bullets.indexOf(bullet);
+                that.bullets.splice(remove_this_bullet_index,1);
+                return;   
+            }
+            
+        }
+
+        Rx.Observable
+            .interval(SPEED)
+            .subscribe(player_shooted)
 
     }
 

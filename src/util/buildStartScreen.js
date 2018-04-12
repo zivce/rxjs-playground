@@ -72,6 +72,12 @@ export default function(wrapper){
 
 
 
+    let explanation = document.createElement("p");
+    explanation.className="game_over_txt_style";
+    explanation.style.fontWeight = "bold";
+    explanation.innerHTML = "Press spacebar to shoot. Move mouse left-right to move the player.";
+    wrapper.appendChild(explanation);
+    
 
 
     let btn_easy = document.createElement("button");
@@ -96,11 +102,6 @@ export default function(wrapper){
     wrapper.appendChild(buttons_group_cfg);
 
 
-    let explanation = document.createElement("p");
-    explanation.className="game_over_txt_style";
-    explanation.innerHTML = "Press spacebar to shoot. Move mouse left-right to move the player.";
-    wrapper.appendChild(explanation);
-    
     //all elements returned
     return {
         easy : btn_easy,

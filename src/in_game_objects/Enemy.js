@@ -38,22 +38,13 @@ export default class Enemy {
             TOP_OFFSET+=MOVEMENT_SPEED;
             that.dom_element.style.top = `${TOP_OFFSET}px`;
 
-            
-            //console.log(that.dom_element.getBoundingClientRect());
-
-
-            //when enemy has reached the end of window
-            //remove it from playground
-            // & unsubscribe from Observable
-            
             let off_bottom_edge = TOP_OFFSET >= windowHeight - 50;
             
-            //ako ima 0 onda je obrisan
+            let alive_and_off_the_screen = off_bottom_edge && that.health_points > 0 ;
 
-            if(off_bottom_edge && that.health_points > 0)
+            if(alive_and_off_the_screen)
             {
                 this.unsubscribe();
-                //console.log(that);
                 removeDomElement(that.dom_element);
                 return;
             }

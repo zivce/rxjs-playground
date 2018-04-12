@@ -28,15 +28,16 @@ let start_screen_elems = buildStartScreen(wrapper);
 
 
 
-//consts    
-let window_height = window.innerHeight - 50;
+const window_height = window.innerHeight - 50;
+let NUMBER_ENEMIES = undefined;//HIGHER = HARDER
+let ENEMIES_SPEED = undefined;//LOWER = HARDER
+let ENEMY_HP_DESTRUCTION = undefined;//LOWER = HARDER
 
+//globals.
 
-let NUMBER_ENEMIES = 20;//HIGHER = HARDER
-let ENEMIES_SPEED = 100;//LOWER = HARDER
-let ENEMY_HP_DESTRUCTION = 5;//LOWER = HARDER
 let Enemies = [];
 let I = 0 ;
+
 
 
 
@@ -72,7 +73,9 @@ let game_start = new Promise((resolve,reject)=>{
                     }
                     else 
                     {
-                        fetch("http://localhost:3000/easy")
+                        let url_easy = "http://localhost:3000/easy";
+
+                        fetch(url_easy)
                         .then((data)=>{            
                             data.json().then((objJson)=>{
                                 NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
@@ -115,7 +118,9 @@ let game_start = new Promise((resolve,reject)=>{
                     }
                     else 
                     {
-                        fetch("http://localhost:3000/medium")
+                        let url_medium = "http://localhost:3000/medium";
+
+                        fetch(url_medium)
                         .then((data)=>{            
                             data.json().then((objJson)=>{
                                 NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
@@ -161,7 +166,9 @@ let game_start = new Promise((resolve,reject)=>{
                     }
                     else 
                     {
-                        fetch("http://localhost:3000/hard")
+                        let url_hard = "http://localhost:3000/hard";
+
+                        fetch(url_hard)
                         .then((data)=>{            
                             data.json().then((objJson)=>{
                                 NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
@@ -192,58 +199,68 @@ let game_over = new Promise((resolve,reject)=>{
     //When difficulty selected proceed to starting game
     game_start
     .then((user_and_diff)=>{
+        
+        
+        const ENEMY_GEN_SPEED = 1000;
+        const FREQ_COLLISION_LISTENER = 1;
+        const FREQ_FIELD_EMPTY_CHECK = 1010;
+        const FREQ_BULLET_HITS = 1;
+
+
 
         document.body.style.background = "url('./src/img/tic-tac-toe.png') repeat";
+
         //remove start screen 
-        
         for(let prop in start_screen_elems)
         {
             removeDomElement(start_screen_elems[prop]);
         }
 
-        console.log("start game");
-
-        
         //player has joined the game
         let player = new Player(wrapper,user_and_diff.username,user_and_diff.diff);
         
+        
+        //generate enemy logic
+
+        const generate_enemy = function(){
+                
+            if(I === NUMBER_ENEMIES)
+            {
+                this.unsubscribe();
+                return;                
+            }    
+
+            if(player.health_points === 0)
+            {
+                this.unsubscribe();
+                resolve(player); 
+                return;
+            }
+
+
+            if(I % 3 === 0)
+                Enemies.push(new Enemy(wrapper));
+            else if (I % 3 === 1)
+                Enemies.push(new EnemyCone(wrapper));
+            else
+                Enemies.push(new EnemyDiamond(wrapper));
+
+            Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
+            
+            I++;
+        }
 
         //generating enemies
-        Rx.Observable.interval(1000)  
-            .subscribe(function(){
-                
-                if(I === NUMBER_ENEMIES)
-                {
-                    this.unsubscribe();
-                    return;                
-                }    
-
-                if(player.health_points === 0)
-                {
-                    this.unsubscribe();
-                    resolve(player); 
-                    return;
-                }
-
-
-                if(I % 3 === 0)
-                    Enemies.push(new Enemy(wrapper));
-                else if (I % 3 === 1)
-                    Enemies.push(new EnemyCone(wrapper));
-                else
-                    Enemies.push(new EnemyDiamond(wrapper));
-
-                Enemies[Enemies.length-1].startMoving(ENEMIES_SPEED);
-                I++;
-            },
+        Rx.Observable.interval(ENEMY_GEN_SPEED)  
+            .subscribe(generate_enemy,
             (err)=>{
                 console.log(err)
             })
         
 
-        //Check for collision
+        //collision logic
 
-        Rx.Observable.interval(1).subscribe(function(){
+        const collision_listener = function(){
             let hp = player.listenerForCollision(Enemies);
             let player_killed = hp <= 0;
 
@@ -252,11 +269,17 @@ let game_over = new Promise((resolve,reject)=>{
                 this.unsubscribe();    
                 resolve(player);            
             }
-        })
+        }
 
-        Rx.Observable
-        .interval(1010)
-        .subscribe(function(){
+        Rx.Observable.interval(FREQ_COLLISION_LISTENER)
+            .subscribe(collision_listener,
+            (err)=>{
+                console.log(err)
+            });
+
+
+
+        const field_clear_checker = function(){
             let enemies =  wrapper.querySelector(".enemy");
 
             if(enemies === null)
@@ -266,59 +289,71 @@ let game_over = new Promise((resolve,reject)=>{
                 resolve(player);
             }
                 
-        })
+        }
+
+        Rx.Observable
+        .interval(FREQ_FIELD_EMPTY_CHECK)
+        .subscribe(field_clear_checker,
+            (err)=>{
+                console.log(err)
+            })
+
+        const bullets_hit_enemies = function(){
+
+            player.bullets
+                .forEach(function(bullet){
+                    Enemies = Enemies
+                    .filter((enemy)=>{
+                        let enemy_rect = enemy.dom_element.getBoundingClientRect();
+                        let enemy_in_game =  enemy_rect.x !== 0 ;
+                        return enemy_in_game;
+                    })
+
+                    Enemies.forEach(function(enemy){
+
+                        //if killed remove from array and continue
+                        
+                        if(enemy.health_points === 0)
+                        {
+                            let remove_enemy_index = Enemies.indexOf(enemy);
+                            Enemies.splice(remove_enemy_index,1);
+                            removeDomElement(enemy.dom_element);
+                            return;
+                        }
+                        
+                    
+                        //this block is for bullet hit enemy logic
+                        let enemy_rect = enemy.dom_element.getBoundingClientRect();
+                        let bullet_rect = bullet.getBoundingClientRect();
+                        let x_match = Math.abs(bullet_rect.x - (enemy_rect.x + enemy_rect.width/2)) - 10 <= enemy_rect.width/2;
+                        let y_match = Math.abs(enemy_rect.y - bullet_rect.y) <= (enemy_rect.height / 2);
+                        let bullet_hit_enemy = y_match && x_match ;
+                        //end block
+
+                        if(bullet_hit_enemy)
+                        {
+
+                            removeDomElement(bullet);
+
+                            player.score += ENEMY_HP_DESTRUCTION;
+                            enemy.health_points-= ENEMY_HP_DESTRUCTION;
+                            
+                        }
+
+                    })
+                })
+        }
+
 
         //shots hit the target  
-        Rx.Observable.interval(1).subscribe(function(){
-
-        
-
-            player.bullets.forEach(function(bullet){
-                Enemies = Enemies
-                .filter((enemy)=>{
-                    let enemy_rect = enemy.dom_element.getBoundingClientRect();
-                    let enemy_in_game =  enemy_rect.x !== 0 ;
-                    return enemy_in_game;
-                })
-
-                Enemies.forEach(function(enemy){
-
-                    //if killed remove from array and continue
-                    
-                    if(enemy.health_points === 0)
-                    {
-                        let remove_enemy_index = Enemies.indexOf(enemy);
-                        Enemies.splice(remove_enemy_index,1);
-                        removeDomElement(enemy.dom_element);
-                        return;
-                    }
-                    
-                
-                    //this block is for bullet hit enemy logic
-                    let enemy_rect = enemy.dom_element.getBoundingClientRect();
-                    let bullet_rect = bullet.getBoundingClientRect();
-                    let x_match = Math.abs(bullet_rect.x - (enemy_rect.x + enemy_rect.width/2)) - 10 <= enemy_rect.width/2;
-                    let y_match = Math.abs(enemy_rect.y - bullet_rect.y) <= (enemy_rect.height / 2);
-                    let bullet_hit_enemy = y_match && x_match ;
-                    //end block
-
-                    if(bullet_hit_enemy)
-                    {
-
-                        removeDomElement(bullet);
-
-                        player.score += ENEMY_HP_DESTRUCTION;
-                        enemy.health_points-= ENEMY_HP_DESTRUCTION;
-                        
-                    }
-
-                })
+        Rx.Observable.interval(FREQ_BULLET_HITS)
+            .subscribe(bullets_hit_enemies,
+            (err)=>{
+                console.log(err)
             })
-        },
-        (err)=>{
-            console.log(err)
+
+
         })
-    })
 })
 
 //building screen after game done 
@@ -353,8 +388,8 @@ game_over.then((player)=>{
             username : user
 
         }
-
-        fetch(`http://localhost:3001/${player.difficulty}`,{
+        let url_diff = `http://localhost:3001/${player.difficulty}`;
+        fetch(url_diff,{
             method:'POST',
             body: JSON.stringify(score_for_save),
             headers: new Headers({
