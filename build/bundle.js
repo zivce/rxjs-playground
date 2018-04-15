@@ -29667,12 +29667,7 @@ exports.default = function (wrapper) {
 
         fetch("http://localhost:3001/easy").then(function (data) {
             data.json().then(function (json) {
-
-                var acc_easy = json.reduce(function (acc, elem) {
-                    return acc + 1;
-                }, 0);
-
-                resolve(acc_easy);
+                resolve(json.length);
             });
         });
     });
@@ -29683,10 +29678,7 @@ exports.default = function (wrapper) {
 
             fetch("http://localhost:3001/medium").then(function (data) {
                 data.json().then(function (json) {
-                    var acc_med_easy = json.reduce(function (acc, elem) {
-                        return acc + 1;
-                    }, acc_easy);
-
+                    var acc_med_easy = json.length + acc_easy;
                     resolve(acc_med_easy);
                 });
             });
@@ -29699,11 +29691,7 @@ exports.default = function (wrapper) {
 
             fetch("http://localhost:3001/hard").then(function (data) {
                 data.json().then(function (json) {
-
-                    var acc_all = json.reduce(function (acc, elem) {
-                        return acc + 1;
-                    }, acc_medium);
-
+                    var acc_all = json.length + acc_medium;
                     resolve(acc_all);
                 });
             });

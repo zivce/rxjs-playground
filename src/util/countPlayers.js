@@ -5,12 +5,7 @@ export default function (wrapper) {
         fetch("http://localhost:3001/easy")
         .then(data => {
             data.json().then((json)=> { 
-                
-                let acc_easy =  json.reduce((acc,elem)=> {
-                    return acc + 1;
-                },0)
-
-                resolve(acc_easy);  
+                resolve(json.length);  
            });
 
         })
@@ -25,10 +20,7 @@ export default function (wrapper) {
             fetch("http://localhost:3001/medium")
             .then(data=>{
                 data.json().then(json=>{
-                    let acc_med_easy = json.reduce((acc,elem)=>{
-                        return acc + 1;
-                    },acc_easy);
-
+                    let acc_med_easy = json.length + acc_easy;
                     resolve(acc_med_easy);
                 })
             })
@@ -44,11 +36,7 @@ export default function (wrapper) {
             fetch("http://localhost:3001/hard")
             .then(data=>{
                 data.json().then(json=>{
-
-                    let acc_all = json.reduce((acc,elem)=>{
-                        return acc + 1;
-                    },acc_medium);
-
+                    let acc_all = json.length + acc_medium;
                     resolve(acc_all);
                 })
 
