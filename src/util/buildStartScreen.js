@@ -1,3 +1,5 @@
+import countPlayers from './countPlayers';
+
 export default function(wrapper){
     //container div
     wrapper = document.createElement("div");
@@ -58,6 +60,7 @@ export default function(wrapper){
     difficulty.innerHTML = "Insert username & select difficulty.";
     wrapper.appendChild(difficulty);
 
+    countPlayers(wrapper);
 
     let player_name = document.createElement("div");
     player_name.className ="player_container";
@@ -71,6 +74,7 @@ export default function(wrapper){
     wrapper.appendChild(player_name);
 
 
+    
 
     let explanation = document.createElement("p");
     explanation.className="game_over_txt_style";

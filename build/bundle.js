@@ -140,7 +140,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "body{\r\n    background-color: #3C91C2;\r\n    color:white;\r\n    overflow-y:hidden;\r\n    overflow-x: hidden;\r\n    font-size: 16px;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;\r\n    \r\n}\r\n.container{\r\n    width: 100%;\r\n}\r\n\r\n.start_screen{\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n}\r\n\r\n.player_container{\r\n    font-size: 1.1em;\r\n    display: flex;\r\n    flex-direction: row;\r\n    margin: 5% auto 5% auto;\r\n}\r\n\r\n.player_container>p{\r\n    flex: 1;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif\r\n}\r\n\r\n.player_container>input{\r\n    height: 30px;\r\n    margin: auto;\r\n    font-size:1em;\r\n    font-weight: bold;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif\r\n}\r\n::placeholder{\r\n    color:red;\r\n    opacity: 1;\r\n}\r\n.buttons_group\r\n{\r\n    display:flex;\r\n    flex-direction: row;\r\n    margin: auto;\r\n    width: 40%;\r\n    height: 40px;\r\n}\r\n.btn_easy{\r\n    flex:1;    \r\n}\r\n.btn_hard{\r\n    flex:1;\r\n}\r\n.btn_medium{\r\n    flex:2;\r\n}\r\n\r\n.btn_config\r\n{\r\n    margin-left: 2px;\r\n    cursor: pointer;\r\n    cursor: hand;\r\n    color:#F4FAFF;    \r\n    border: none;\r\n    background: linear-gradient(0deg,#606975,#383D3B 70%);\r\n    font-size: 1.3rem;\r\n    font-weight: lighter;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;\r\n    width: 30%;\r\n\r\n}\r\n\r\n.btn_config:hover{\r\n    background: linear-gradient(0deg,#383B53,#606975 70%);\r\n}\r\n\r\n.table_scores\r\n{    \r\n    font-size: 20px;\r\n    border-collapse: collapse;\r\n    margin: 20px auto 0 auto;   \r\n    border: 0.2px solid rgb(1, 29, 29);\r\n}\r\n\r\n.table_scores th{\r\n    padding: 20px;\r\n}\r\n.table_scores td{\r\n    padding: 30px;\r\n}\r\n.table_scores thead{\r\n    background-color: #383B53;\r\n    color: #F4FAFF;\r\n}\r\n.scores_body{\r\n    height:  500px;\r\n}\r\n.scores_body>tr\r\n{\r\n    color:white;\r\n    box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, 0.12), inset 1px -1px 3px rgba(0, 0, 0, 0.24);\r\n    text-align: center;\r\n}\r\n\r\n.scores_body>tr:hover\r\n{\r\n    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.5);\r\n}\r\n/* gold */\r\n.scores_body>tr:nth-child(1)\r\n{\r\n    background: linear-gradient(#DAA520,#EDC54E);\r\n}\r\n/* silver */\r\n.scores_body>tr:nth-child(2)\r\n{\r\n    background: linear-gradient(#A9A9A9,#adabab);\r\n}\r\n\r\n/* bronze */\r\n.scores_body>tr:nth-child(3)\r\n{\r\n    background: linear-gradient(#cd7f32,#d88739);\r\n}\r\n\r\n.scores_body>tr:nth-child(2n)\r\n{\r\n    background-color: #7b8594;\r\n}\r\n.scores_body>tr\r\n{\r\n    background-color: #606975;\r\n}\r\n\r\n.game_over_parag\r\n{\r\n    font-size: 1.5em;\r\n    font-weight: 400;\r\n\r\n    text-align: center;\r\n}\r\n.game_over_parag span:nth-child(1){\r\n    font-weight: 700;\r\n\r\n}\r\n\r\n.game_over_parag span:nth-child(2){\r\n    font-weight: bold;\r\n}\r\n.enemy {\r\n    /*dummy class */\r\n}\r\n\r\n.figures_wrapper{\r\n    height: 40%;\r\n    display: inline-flex;\r\n    margin: auto;\r\n    padding-top: 2%;\r\n}", ""]);
+exports.push([module.i, "body{\r\n    background-color: #3C91C2;\r\n    color:white;\r\n    overflow-y:hidden;\r\n    overflow-x: hidden;\r\n    font-size: 16px;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;\r\n    \r\n}\r\n.container{\r\n    width: 100%;\r\n    height: 95vh;\r\n}\r\n\r\n.start_screen{\r\n    display: flex;\r\n    flex-direction: column;\r\n\r\n}\r\n\r\n.player_container{\r\n    font-size: 1.1em;\r\n    display: flex;\r\n    flex-direction: row;\r\n    margin: 5% auto 5% auto;\r\n}\r\n\r\n.player_container>p{\r\n    flex: 1;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif\r\n}\r\n\r\n.player_container>input{\r\n    height: 30px;\r\n    margin: auto;\r\n    font-size:1em;\r\n    font-weight: bold;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif\r\n}\r\n::placeholder{\r\n    color:red;\r\n    opacity: 1;\r\n}\r\n.buttons_group\r\n{\r\n    display:flex;\r\n    flex-direction: row;\r\n    margin: auto;\r\n    width: 40%;\r\n    height: 40px;\r\n}\r\n.btn_easy{\r\n    flex:1;    \r\n}\r\n.btn_hard{\r\n    flex:1;\r\n}\r\n.btn_medium{\r\n    flex:2;\r\n}\r\n\r\n.btn_config\r\n{\r\n    margin-left: 2px;\r\n    cursor: pointer;\r\n    cursor: hand;\r\n    color:#F4FAFF;    \r\n    border: none;\r\n    background: linear-gradient(0deg,#606975,#383D3B 70%);\r\n    font-size: 1.3rem;\r\n    font-weight: lighter;\r\n    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;\r\n    width: 30%;\r\n\r\n}\r\n\r\n.btn_config:hover{\r\n    background: linear-gradient(0deg,#383B53,#606975 70%);\r\n}\r\n\r\n.table_scores\r\n{    \r\n    font-size: 20px;\r\n    border-collapse: collapse;\r\n    margin: 20px auto 0 auto;   \r\n    border: 0.2px solid rgb(1, 29, 29);\r\n}\r\n\r\n.table_scores th{\r\n    padding: 20px;\r\n}\r\n.table_scores td{\r\n    padding: 30px;\r\n}\r\n.table_scores thead{\r\n    background-color: #383B53;\r\n    color: #F4FAFF;\r\n}\r\n.scores_body{\r\n    height:  500px;\r\n}\r\n.scores_body>tr\r\n{\r\n    color:white;\r\n    box-shadow: inset 0px 1px 1px 1px rgba(0, 0, 0, 0.12), inset 1px -1px 3px rgba(0, 0, 0, 0.24);\r\n    text-align: center;\r\n}\r\n\r\n.scores_body>tr:hover\r\n{\r\n    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.5);\r\n}\r\n/* gold */\r\n.scores_body>tr:nth-child(1)\r\n{\r\n    background: linear-gradient(#DAA520,#EDC54E);\r\n}\r\n/* silver */\r\n.scores_body>tr:nth-child(2)\r\n{\r\n    background: linear-gradient(#A9A9A9,#adabab);\r\n}\r\n\r\n/* bronze */\r\n.scores_body>tr:nth-child(3)\r\n{\r\n    background: linear-gradient(#cd7f32,#d88739);\r\n}\r\n\r\n.scores_body>tr:nth-child(2n)\r\n{\r\n    background-color: #7b8594;\r\n}\r\n.scores_body>tr\r\n{\r\n    background-color: #606975;\r\n}\r\n\r\n.game_over_parag\r\n{\r\n    font-size: 1.5em;\r\n    font-weight: 400;\r\n\r\n    text-align: center;\r\n}\r\n.game_over_parag span:nth-child(1){\r\n    font-weight: 700;\r\n\r\n}\r\n\r\n.game_over_parag span:nth-child(2){\r\n    font-weight: bold;\r\n}\r\n.enemy {\r\n    /*dummy class */\r\n}\r\n\r\n.figures_wrapper{\r\n    height: 40%;\r\n    display: inline-flex;\r\n    margin: auto;\r\n    padding-top: 2%;\r\n}\r\n\r\n.players_count{\r\n    text-align: center;\r\n    font-weight: 400;\r\n}\r\n\r\n.players_count span{\r\n    font-weight: bold;\r\n}", ""]);
 
 // exports
 
@@ -28622,20 +28622,12 @@ var Enemy = function () {
                 TOP_OFFSET += MOVEMENT_SPEED;
                 that.dom_element.style.top = TOP_OFFSET + 'px';
 
-                //console.log(that.dom_element.getBoundingClientRect());
-
-
-                //when enemy has reached the end of window
-                //remove it from playground
-                // & unsubscribe from Observable
-
                 var off_bottom_edge = TOP_OFFSET >= windowHeight - 50;
 
-                //ako ima 0 onda je obrisan
+                var alive_and_off_the_screen = off_bottom_edge && that.health_points > 0;
 
-                if (off_bottom_edge && that.health_points > 0) {
+                if (alive_and_off_the_screen) {
                     this.unsubscribe();
-                    //console.log(that);
                     (0, _removeElem2.default)(that.dom_element);
                     return;
                 }
@@ -28699,7 +28691,6 @@ var Player = function () {
 
         //simple init
         this.difficulty = cfg;
-
         this.username = userna;
         this.score = 0;
         this.health_points = 100;
@@ -28707,24 +28698,26 @@ var Player = function () {
         this.container = node;
         this.dom_element = document.createElement("div");
         this.dom_element.className = "player_fill";
-
         var that = this;
+        var FREQ_HP_SCORES_UPDATES = 10;
 
         node.appendChild(this.dom_element);
 
         //movement events handled
         var mouse_move_events = _rxjs2.default.Observable.fromEvent(document, 'mousemove');
-        mouse_move_events.subscribe(function (event) {
+
+        var mouse_moved = function mouse_moved(event) {
 
             var cursor_not_close_to_right_edge = event.clientX < window.innerWidth - 250;
 
             if (cursor_not_close_to_right_edge) _this.dom_element.style.left = event.clientX + 50;else _this.dom_element.style.left = window.innerWidth - 200;
-        });
+        };
+
+        mouse_move_events.subscribe(mouse_moved);
 
         //space pressed handled
         var spacebar_pressed = _rxjs2.default.Observable.fromEvent(document, 'keypress');
-
-        spacebar_pressed.subscribe(function (keypressed_event) {
+        var spacebar_pressed_handler = function spacebar_pressed_handler(keypressed_event) {
             if (keypressed_event.code === 'Space') {
                 that.firePower();
             }
@@ -28732,13 +28725,14 @@ var Player = function () {
             var shown_game_over_txt = document.querySelector(".game_over_txt_style") !== null;
 
             if (shown_game_over_txt) this.unsubscribe();
-        });
+        };
+        spacebar_pressed.subscribe(spacebar_pressed_handler);
 
         //vars used in subscription below
         var thisPlayer = this;
         var RETURN_TO_NORMAL_PLAYER = 300;
 
-        spacebar_pressed.subscribe(function (keypressed_event) {
+        var recoil_player_movement_handler = function recoil_player_movement_handler(keypressed_event) {
             var that = this; //unsubscribe function
             if (keypressed_event.code === 'Space') {
                 thisPlayer.dom_element.className = "player_shooted";
@@ -28747,7 +28741,11 @@ var Player = function () {
             window.setTimeout(function () {
                 thisPlayer.dom_element.className = "player_fill";
             }, RETURN_TO_NORMAL_PLAYER);
-        });
+        };
+
+        spacebar_pressed.subscribe(recoil_player_movement_handler);
+
+        //scores and hp info 
 
         var score_container = document.createElement("p");
         score_container.className = "player_score";
@@ -28758,20 +28756,20 @@ var Player = function () {
         node.appendChild(hp_container);
 
         //Update score 
-        _rxjs2.default.Observable.interval(10).subscribe(function () {
+        var hp_scores_updater = function hp_scores_updater() {
             score_container.innerHTML = 'Score: ' + that.score;
             hp_container.innerHTML = 'HP: ' + that.health_points;
 
             var shown_game_over_txt = document.querySelector(".game_over_txt_style") !== null;
 
             if (shown_game_over_txt) {
-
                 (0, _removeElem2.default)(score_container);
                 (0, _removeElem2.default)(hp_container);
-
                 this.unsubscribe();
             }
-        });
+        };
+
+        _rxjs2.default.Observable.interval(FREQ_HP_SCORES_UPDATES).subscribe(hp_scores_updater);
     }
 
     _createClass(Player, [{
@@ -28823,7 +28821,7 @@ var Player = function () {
 
             var that = this;
 
-            _rxjs2.default.Observable.interval(SPEED).subscribe(function () {
+            var player_shooted = function player_shooted() {
 
                 //player shooted
 
@@ -28840,7 +28838,9 @@ var Player = function () {
                     that.bullets.splice(remove_this_bullet_index, 1);
                     return;
                 }
-            });
+            };
+
+            _rxjs2.default.Observable.interval(SPEED).subscribe(player_shooted);
         }
     }]);
 
@@ -28918,12 +28918,13 @@ document.body.appendChild(wrapper);
 
 var start_screen_elems = (0, _buildStartScreen2.default)(wrapper);
 
-//consts    
 var window_height = window.innerHeight - 50;
+var NUMBER_ENEMIES = undefined; //HIGHER = HARDER
+var ENEMIES_SPEED = undefined; //LOWER = HARDER
+var ENEMY_HP_DESTRUCTION = undefined; //LOWER = HARDER
 
-var NUMBER_ENEMIES = 20; //HIGHER = HARDER
-var ENEMIES_SPEED = 100; //LOWER = HARDER
-var ENEMY_HP_DESTRUCTION = 5; //LOWER = HARDER
+//globals.
+
 var Enemies = [];
 var I = 0;
 
@@ -28936,99 +28937,103 @@ var game_start = new Promise(function (resolve, reject) {
         username_empty = start_screen_elems.input_player.value === "";
     });
 
-    setTimeout(function () {
-        //do ajax here 
-        start_screen_elems.easy.onclick = function (event) {
+    //do ajax here 
+    start_screen_elems.easy.onclick = function (event) {
 
-            if (username_empty) {
-                start_screen_elems.input_player.placeholder = "Fill the input";
-                return;
-            } else {
-                username = start_screen_elems.input_player.value;
+        if (username_empty) {
+            start_screen_elems.input_player.placeholder = "Fill the input";
+            return;
+        } else {
+            username = start_screen_elems.input_player.value;
 
-                (0, _checkUsername2.default)(username, "easy").then(function (user_in_use) {
-                    if (user_in_use) {
-                        start_screen_elems.input_player.value = "";
-                        start_screen_elems.input_player.placeholder = "Insert other username";
-                    } else {
-                        fetch("http://localhost:3000/easy").then(function (data) {
-                            data.json().then(function (objJson) {
-                                NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                                ENEMIES_SPEED = objJson.ENEMIES_SPEED;
-                                ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-                            });
-                            var resolveObj = {
-                                username: username,
-                                diff: "easy"
-                            };
-                            resolve(resolveObj);
+            (0, _checkUsername2.default)(username, "easy").then(function (user_in_use) {
+                if (user_in_use) {
+                    start_screen_elems.input_player.value = "";
+                    start_screen_elems.input_player.placeholder = "Insert other username";
+                } else {
+                    var url_easy = "http://localhost:3000/easy";
+
+                    fetch(url_easy).then(function (data) {
+                        data.json().then(function (objJson) {
+                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                            ENEMIES_SPEED = objJson.ENEMIES_SPEED;
+                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                         });
-                    }
-                });
-            }
-        };
+                        var resolveObj = {
+                            username: username,
+                            diff: "easy"
+                        };
+                        resolve(resolveObj);
+                    });
+                }
+            });
+        }
+    };
 
-        start_screen_elems.med.onclick = function (event) {
+    start_screen_elems.med.onclick = function (event) {
 
-            if (username_empty) {
-                start_screen_elems.input_player.placeholder = "Fill the input";
-                return;
-            } else {
+        if (username_empty) {
+            start_screen_elems.input_player.placeholder = "Fill the input";
+            return;
+        } else {
 
-                username = start_screen_elems.input_player.value;
+            username = start_screen_elems.input_player.value;
 
-                (0, _checkUsername2.default)(username, "medium").then(function (user_in_use) {
-                    if (user_in_use) {
-                        start_screen_elems.input_player.value = "";
-                        start_screen_elems.input_player.placeholder = "Insert other username";
-                    } else {
-                        fetch("http://localhost:3000/medium").then(function (data) {
-                            data.json().then(function (objJson) {
-                                NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                                ENEMIES_SPEED = objJson.ENEMIES_SPEED;
-                                ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-                            });
-                            var resolveObj = {
-                                username: username,
-                                diff: "medium"
-                            };
-                            resolve(resolveObj);
+            (0, _checkUsername2.default)(username, "medium").then(function (user_in_use) {
+                if (user_in_use) {
+                    start_screen_elems.input_player.value = "";
+                    start_screen_elems.input_player.placeholder = "Insert other username";
+                } else {
+                    var url_medium = "http://localhost:3000/medium";
+
+                    fetch(url_medium).then(function (data) {
+                        data.json().then(function (objJson) {
+                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                            ENEMIES_SPEED = objJson.ENEMIES_SPEED;
+                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                         });
-                    }
-                });
-            }
-        };
+                        var resolveObj = {
+                            username: username,
+                            diff: "medium"
+                        };
+                        resolve(resolveObj);
+                    });
+                }
+            });
+        }
+    };
 
-        start_screen_elems.hard.onclick = function (event) {
+    start_screen_elems.hard.onclick = function (event) {
 
-            if (username_empty) {
-                start_screen_elems.input_player.placeholder = "Fill the input";
-                return;
-            } else {
-                username = start_screen_elems.input_player.value;
+        if (username_empty) {
+            start_screen_elems.input_player.placeholder = "Fill the input";
+            return;
+        } else {
+            username = start_screen_elems.input_player.value;
 
-                (0, _checkUsername2.default)(username, "hard").then(function (user_in_use) {
-                    if (user_in_use) {
-                        start_screen_elems.input_player.value = "";
-                        start_screen_elems.input_player.placeholder = "Insert other username";
-                    } else {
-                        fetch("http://localhost:3000/hard").then(function (data) {
-                            data.json().then(function (objJson) {
-                                NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
-                                ENEMIES_SPEED = objJson.ENEMIES_SPEED;
-                                ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
-                            });
-                            var resolveObj = {
-                                username: username,
-                                diff: "hard"
-                            };
-                            resolve(resolveObj);
+            (0, _checkUsername2.default)(username, "hard").then(function (user_in_use) {
+                if (user_in_use) {
+                    start_screen_elems.input_player.value = "";
+                    start_screen_elems.input_player.placeholder = "Insert other username";
+                } else {
+                    var url_hard = "http://localhost:3000/hard";
+
+                    fetch(url_hard).then(function (data) {
+                        data.json().then(function (objJson) {
+                            NUMBER_ENEMIES = objJson.NUMBER_ENEMIES;
+                            ENEMIES_SPEED = objJson.ENEMIES_SPEED;
+                            ENEMY_HP_DESTRUCTION = objJson.ENEMY_HP_DESTRUCTION;
                         });
-                    }
-                });
-            }
-        };
-    }, 1000);
+                        var resolveObj = {
+                            username: username,
+                            diff: "hard"
+                        };
+                        resolve(resolveObj);
+                    });
+                }
+            });
+        }
+    };
 });
 
 var game_over = new Promise(function (resolve, reject) {
@@ -29036,20 +29041,24 @@ var game_over = new Promise(function (resolve, reject) {
     //When difficulty selected proceed to starting game
     game_start.then(function (user_and_diff) {
 
-        document.body.style.background = "url('./src/img/tic-tac-toe.png') repeat";
-        //remove start screen 
+        var ENEMY_GEN_SPEED = 1000;
+        var FREQ_COLLISION_LISTENER = 1;
+        var FREQ_FIELD_EMPTY_CHECK = 1010;
+        var FREQ_BULLET_HITS = 1;
 
+        document.body.style.background = "url('./src/img/tic-tac-toe.png') repeat";
+
+        //remove start screen 
         for (var prop in start_screen_elems) {
             (0, _removeElem2.default)(start_screen_elems[prop]);
         }
 
-        console.log("start game");
-
         //player has joined the game
         var player = new _Player2.default(wrapper, user_and_diff.username, user_and_diff.diff);
 
-        //generating enemies
-        _rxjs2.default.Observable.interval(1000).subscribe(function () {
+        //generate enemy logic
+
+        var generate_enemy = function generate_enemy() {
 
             if (I === NUMBER_ENEMIES) {
                 this.unsubscribe();
@@ -29065,14 +29074,18 @@ var game_over = new Promise(function (resolve, reject) {
             if (I % 3 === 0) Enemies.push(new _Enemy2.default(wrapper));else if (I % 3 === 1) Enemies.push(new _DerivedEnemies.EnemyCone(wrapper));else Enemies.push(new _DerivedEnemies.EnemyDiamond(wrapper));
 
             Enemies[Enemies.length - 1].startMoving(ENEMIES_SPEED);
+
             I++;
-        }, function (err) {
+        };
+
+        //generating enemies
+        _rxjs2.default.Observable.interval(ENEMY_GEN_SPEED).subscribe(generate_enemy, function (err) {
             console.log(err);
         });
 
-        //Check for collision
+        //collision logic
 
-        _rxjs2.default.Observable.interval(1).subscribe(function () {
+        var collision_listener = function collision_listener() {
             var hp = player.listenerForCollision(Enemies);
             var player_killed = hp <= 0;
 
@@ -29080,9 +29093,13 @@ var game_over = new Promise(function (resolve, reject) {
                 this.unsubscribe();
                 resolve(player);
             }
+        };
+
+        _rxjs2.default.Observable.interval(FREQ_COLLISION_LISTENER).subscribe(collision_listener, function (err) {
+            console.log(err);
         });
 
-        _rxjs2.default.Observable.interval(1010).subscribe(function () {
+        var field_clear_checker = function field_clear_checker() {
             var enemies = wrapper.querySelector(".enemy");
 
             if (enemies === null) {
@@ -29090,10 +29107,13 @@ var game_over = new Promise(function (resolve, reject) {
                 this.unsubscribe();
                 resolve(player);
             }
+        };
+
+        _rxjs2.default.Observable.interval(FREQ_FIELD_EMPTY_CHECK).subscribe(field_clear_checker, function (err) {
+            console.log(err);
         });
 
-        //shots hit the target  
-        _rxjs2.default.Observable.interval(1).subscribe(function () {
+        var bullets_hit_enemies = function bullets_hit_enemies() {
 
             player.bullets.forEach(function (bullet) {
                 Enemies = Enemies.filter(function (enemy) {
@@ -29130,7 +29150,10 @@ var game_over = new Promise(function (resolve, reject) {
                     }
                 });
             });
-        }, function (err) {
+        };
+
+        //shots hit the target  
+        _rxjs2.default.Observable.interval(FREQ_BULLET_HITS).subscribe(bullets_hit_enemies, function (err) {
             console.log(err);
         });
     });
@@ -29164,8 +29187,8 @@ game_over.then(function (player) {
             username: user
 
         };
-
-        fetch('http://localhost:3001/' + player.difficulty, {
+        var url_diff = 'http://localhost:3001/' + player.difficulty;
+        fetch(url_diff, {
             method: 'POST',
             body: JSON.stringify(score_for_save),
             headers: new Headers({
@@ -29379,7 +29402,9 @@ exports.default = function (wrapper, player) {
 
             if (typeof table !== 'undefined') while (table.firstChild) {
                         table.removeChild(table.firstChild);
-            }fetch('http://localhost:3001/' + player.difficulty).then(function (resp) {
+            }var url_diff = 'http://localhost:3001/' + player.difficulty;
+
+            fetch(url_diff).then(function (resp) {
                         return resp.json();
             }).then(function (scores_arr) {
 
@@ -29532,6 +29557,8 @@ exports.default = function (wrapper) {
     difficulty.innerHTML = "Insert username & select difficulty.";
     wrapper.appendChild(difficulty);
 
+    (0, _countPlayers2.default)(wrapper);
+
     var player_name = document.createElement("div");
     player_name.className = "player_container";
 
@@ -29542,6 +29569,12 @@ exports.default = function (wrapper) {
     var input_player = document.createElement("input");
     player_name.appendChild(input_player);
     wrapper.appendChild(player_name);
+
+    var explanation = document.createElement("p");
+    explanation.className = "game_over_txt_style";
+    explanation.style.fontWeight = "bold";
+    explanation.innerHTML = "Press spacebar to shoot. Move mouse left-right to move the player.";
+    wrapper.appendChild(explanation);
 
     var btn_easy = document.createElement("button");
     btn_easy.className = "btn_config btn_easy";
@@ -29562,11 +29595,6 @@ exports.default = function (wrapper) {
 
     wrapper.appendChild(buttons_group_cfg);
 
-    var explanation = document.createElement("p");
-    explanation.className = "game_over_txt_style";
-    explanation.innerHTML = "Press spacebar to shoot. Move mouse left-right to move the player.";
-    wrapper.appendChild(explanation);
-
     //all elements returned
     return {
         easy: btn_easy,
@@ -29581,6 +29609,12 @@ exports.default = function (wrapper) {
         wrapper: wrapper
     };
 };
+
+var _countPlayers = __webpack_require__(/*! ./countPlayers */ "./src/util/countPlayers.js");
+
+var _countPlayers2 = _interopRequireDefault(_countPlayers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 
@@ -29608,6 +29642,68 @@ exports.default = function (username, diff) {
         });
 
         return filtered.length != 0;
+    });
+};
+
+/***/ }),
+
+/***/ "./src/util/countPlayers.js":
+/*!**********************************!*\
+  !*** ./src/util/countPlayers.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (wrapper) {
+
+    var easy_lvl_counter = new Promise(function (resolve, reject) {
+
+        fetch("http://localhost:3001/easy").then(function (data) {
+            data.json().then(function (json) {
+                resolve(json.length);
+            });
+        });
+    });
+
+    var medium_lvl_counter = new Promise(function (resolve, reject) {
+
+        easy_lvl_counter.then(function (acc_easy) {
+
+            fetch("http://localhost:3001/medium").then(function (data) {
+                data.json().then(function (json) {
+                    var acc_med_easy = json.length + acc_easy;
+                    resolve(acc_med_easy);
+                });
+            });
+        });
+    });
+
+    var hard_lvl_counter = new Promise(function (resolve, reject) {
+
+        medium_lvl_counter.then(function (acc_medium) {
+
+            fetch("http://localhost:3001/hard").then(function (data) {
+                data.json().then(function (json) {
+                    var acc_all = json.length + acc_medium;
+                    resolve(acc_all);
+                });
+            });
+        });
+    });
+
+    hard_lvl_counter.then(function (acc_all) {
+
+        var players_count = document.createElement("p");
+        players_count.className = "players_count";
+        players_count.innerHTML = "<span> " + acc_all + " </span> players have played this game so far.";
+        wrapper.appendChild(players_count);
     });
 };
 
